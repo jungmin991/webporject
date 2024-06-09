@@ -15,7 +15,8 @@ const User = {
     },
     // 유저 조회
     get: (userId, result) => {
-        con.query('SELECT * FROM user WHERE id = ?', userId, (err, res) => {
+        console.log(userId, 'userId in get');
+        con.query('SELECT * FROM login WHERE id = ?', userId, (err, res) => {
             if (err) {
                 console.log('Error while fetching data');
                 result(err, null);
