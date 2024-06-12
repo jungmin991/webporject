@@ -8,3 +8,7 @@ exports.getCampInfo = (req, res) => {
     camp.getCampInfo(req, res);
 }
 
+exports.mySiteList = (req, res) => {
+    camp.mySiteList(req, res);
+}
+
