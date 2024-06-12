@@ -1,55 +1,31 @@
 const con = require('../db');
 
 const User = {
-    // 유저 생성
-    create: (user, result) => {
-        con.query('INSERT INTO user SET ?', user, (err, res) => {
+    // 회원가입
+    signin: (req, res) => {
+        conn.query(`INSERT INTO login (id, pw, userType)
+                VALUES (?, ?, ?)`, [req.body.id, req.body.pw, req.body.userType], (err, result) => {
             if (err) {
-                console.log('Error while inserting data');
-                result(err, null);
+                console.log(err)
             } else {
-                console.log('User created successfully');
-                result(null, res);
+                res.send(true);
             }
-        });
+
+        })
     },
-    // 유저 조회
-    get: (userId, result) => {
-        console.log(userId, 'userId in get');
-        con.query('SELECT * FROM login WHERE id = ?', userId, (err, res) => {
+
+    //로그인
+    login: (id, pw, callback) => {
+        conn.query(`SELECT * FROM login WHERE id = ? AND pw = ?`, [id, pw], (err, result) => {
             if (err) {
-                console.log('Error while fetching data');
-                result(err, null);
+                console.log(err);
+                callback(err, null);
             } else {
-                console.log('User fetched successfully');
-                result(null, res);
-            }
-        });
-    },
-    // 유저 업데이트
-    update: (userId, user, result) => {
-        con.query('UPDATE user SET ? WHERE id = ?', [user, userId], (err, res) => {
-            if (err) {
-                console.log('Error while updating data');
-                result(err, null);
-            } else {
-                console.log('User updated successfully');
-                result(null, res);
-            }
-        });
-    },
-    // 유저 삭제
-    delete: (userId, result) => {
-        con.query('DELETE FROM user WHERE id = ?', userId, (err, res) => {
-            if (err) {
-                console.log('Error while deleting data');
-                result(err, null);
-            } else {
-                console.log('User deleted successfully');
-                result(null, res);
+                callback(null, result);
             }
         });
     }
+    
 };
 
 module.exports = User;

@@ -6,12 +6,14 @@ const hostname = "127.0.0.1";
 const port = 3000;
 
 const login = require("./routes/login");
+const campGround = require("./routes/campGround");
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
 app.use(cors());
 
 app.use(login);
+app.use(campGround);
 
 app.listen(port, hostname, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
