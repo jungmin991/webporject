@@ -1,10 +1,10 @@
 const router = require('express').Router();
 const controller = require('../controllers/campGroundController.js');
 
-router.post('/api/register', controller.register);
-router.post('/api/getCampInfo', controller.getCampInfo);
-router.post('/api/campGroundList', controller.campGroundList);
-router.post('/api/mySiteList', controller.mySiteList);
+router.post('/campground/register', controller.register);
+router.post('/campground/getCampInfo', controller.getCampInfo);
+router.post('/campground/campGroundList', controller.campGroundList);
+router.post('/campground/mySiteList', controller.mySiteList);
 
 module.exports = router;
 

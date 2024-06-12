@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const controller = require('../controllers/reservationController.js');
 
-router.post('/api/register', controller.register);
-router.post('/api/modify', controller.modify);
+router.post('/reservation/register', controller.register);
+router.post('/reservation/modify', controller.modify);
 
 
 module.exports = router;
