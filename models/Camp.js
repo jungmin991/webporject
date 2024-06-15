@@ -79,13 +79,15 @@ const Camp = {
 
     // 게스트가 자신의 캠핑장 정보 조회 → 리뷰 작성
     mySiteList: (req, res) => {
+        console.log(req.body.guestNo);
         const query =
             'select name, siteName, state, campground.campGroundNo ' +
             'from campground ' +
             'join campgroundsite on campground.campgroundNo = campgroundsite.campgroundNo ' +
             'join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo ' +
-            'where guestNo like ' + req.body.userNo;
+            'where guestNo like ' + req.body.guestNo;
         conn.query(query, (err, result) => {
+            console.log(result);
             res.send(result);
         })
     },
