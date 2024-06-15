@@ -13,7 +13,7 @@ const Reservation = {
 
     // 예약 정보 수정
     modify: (req, res) => {
-        conn.query('UPDATE reservation SET state=\'IMPOSS\' WHERE reservationNo LIKE ' + req.body.reservationNo, (err, result) => {
+        conn.query('UPDATE reservation SET state= \''+ req.body.state +'\' WHERE reservationNo LIKE ' + req.body.reservationNo, (err, result) => {
             if (err) {
                 console.log(err);
             } else {
@@ -23,8 +23,7 @@ const Reservation = {
     },
 
     list: (req, res) => {
-        console.log(req);
-        const query = 'select enterDay, leaveDay, reservation.peopleNum, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
+        const query = 'select reservationNo, enterDay, leaveDay, reservation.peopleNum, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
         conn.query(query, (err, result) => {
             if (err) {
                 console.log(err);
