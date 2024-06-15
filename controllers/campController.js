@@ -16,6 +16,9 @@ exports.campGroundList = (req, res) => {
     camp.campGroundList(req, res);
 }
 
+exports.getTest = (req, res) => {
+    camp.getTest(req, res);
+}
 exports.insertFacilities = (req, res) => {
     camp.insertFacilities(req, res);
 }
