@@ -3,6 +3,7 @@ import './css/myRegistCamp.css'
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import CampingItem from './CampingItem';
+import {requestURL} from '../config/config';
 
 const CampingList = () => {
 
@@ -11,7 +12,7 @@ const CampingList = () => {
     const [data, setData] = useState([]);
 
     function campings() {
-        axios.post('/campground/campGroundList' , {userNo: userNo.id})
+        axios.post(requestURL+'/campground/getCampInfo' , {userNo: userNo.id})
         .then((response) => {
             setData(response.data);
         })
