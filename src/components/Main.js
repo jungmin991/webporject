@@ -33,8 +33,7 @@ export default function Main() {
                 navigate('/guest');
             }
             else if (data.userType == 'HOST') {
-                //id값을 넘겨주어야 함
-                navigate('/host');
+                navigate('/host/' + data.userNo);
             }
 
             console.log('Login successful');

@@ -32,11 +32,14 @@ const Camp = {
             })
     },
 
-    // 캠핑장 리스트 조회
+    // 캠핑장 리스트 조회 (UserNo로 조회)
     campGroundList: (req, res) => {
-        conn.query('select * from campground join facilitiesinfo on campground.facilitiesinfoNo = facilitiesInfo.facilitiesInfoNo left join review on campground.campGroundNo = review.campGroundNo join play on facilitiesinfo.playNo = play.playNo join surround on facilitiesinfo.surroundNo = surround.surroundNo  join facilities on facilitiesinfo.facilitiesNo = facilities.facilitiesNo where campground.campGroundNo like ' + req.body.campGroundNo, (err, result) => {
-            console.log(result);
-            res.send(result);
+        conn.query("SELECT * FROM campground WHERE userNo = ?", [req.body.userNo], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
         })
     },
 
