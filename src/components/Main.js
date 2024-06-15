@@ -34,7 +34,7 @@ export default function Main() {
             });
             console.log(data.userType);
             if (data.userType == 'GUEST') {
-                navigate('/guest');
+                navigate('/MyReservationList/'+data.userNo);
             } else if (data.userType == 'HOST') {
                 navigate('/host/' + data.userNo);
             }

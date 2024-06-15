@@ -23,7 +23,10 @@ export default function MyReservationList() {
         getReservationList();
     }, []);
 
-    return( <div>
+    return <div>
+        <button onClick={() => {
+            navigate('/SearchCampGround/'+guestNo.guestNo);
+        }}>검색</button>
         {myReservationList.map((reservation, index) => (
             <div>
                 <span> {reservation.name}</span>
@@ -35,5 +38,5 @@ export default function MyReservationList() {
             </div>
         ))}
     </div>
-    )
+
 }

@@ -35,6 +35,9 @@ const CampingList = () => {
                 navigate('/RegistCampGround1/' + userNo.id)
             }}>캠핑장 추가
             </button>
+            <button onClick={()=>{
+                navigate('/ReservationList/'+ userNo.id)
+            }}>예약 확정</button>
         </div>
     );
 };

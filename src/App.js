@@ -7,7 +7,6 @@ import RegistFacilities from "./Owner/CampGround/RegistFacilities";
 import RegistCampGroundInfo from './Owner/CampGround/RegistCampGroundInfo';
 import {useState} from "react";
 import RegistCampGround3 from "./Owner/CampGround/RegistCampGround3";
-import CampingForm from './Owner/CampingForm';
 import CampingList from './Owner/CampingList';
 import CampingSearchForm from "./Reservation/CampingSearchForm";
 import RegistSite from "./Owner/CampGroundSite/RegistSite";
@@ -49,7 +48,7 @@ function App() {
                                                                             setCampGroundInfo={setCampGroundInfo}/>}/>;
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo}
                                                                              setCampGroundInfo={setCampGroundInfo}/>}/>;
-                <Route path='/SearchCampGround' element={<CampingSearchForm/>}/>
+                <Route path='/SearchCampGround/:guestNo' element={<CampingSearchForm/>}/>
                 <Route path='/RegistSite/:campGroundNo' element={<RegistSite/>}/>
                 <Route path='/SiteList/:campGroundNo' element={<SiteList/>}/>
                 <Route path='/ReservationList/:hostNo' element={<ReservationList/>}/>
