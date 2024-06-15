@@ -11,9 +11,11 @@ export default function CampingSiteList() {
     const [data, setData] = useState([]);
 
     function sites() {
-        axios.post(requestURL + '/campsite/siteList', { userNo : user.userNo })
+        console.log(user)
+        axios.post(requestURL + '/campsite/siteList', user)
             .then((response) => {
                 setData(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
