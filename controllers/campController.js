@@ -12,3 +12,7 @@ exports.mySiteList = (req, res) => {
     camp.mySiteList(req, res);
 }
 
+exports.campGroundList = (req, res) => {
+    camp.campGroundList(req, res);
+}
+

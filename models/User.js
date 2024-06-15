@@ -1,4 +1,4 @@
-const con = require('../db');
+const conn = require('../db');
 
 const User = {
     // 회원가입
@@ -15,15 +15,14 @@ const User = {
     },
 
     //로그인
-    login: (id, pw, callback) => {
-        conn.query(`SELECT * FROM login WHERE id = ? AND pw = ?`, [id, pw], (err, result) => {
+    login: (req, res) => {
+        conn.query(`SELECT * FROM login WHERE id = ? AND pw = ?`, [req.body.id, req.body.pw], (err, result) => {
             if (err) {
-                console.log(err);
-                callback(err, null);
+                console.log(err)
             } else {
-                callback(null, result);
+                res.send(result);
             }
-        });
+        })
     }
     
 };
