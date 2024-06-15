@@ -1,21 +1,44 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Register from './Register';
+
+
 
 
 export default function Main() {
 
-    const [id, setId] = useState('');
-    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
+    const [data, setData] = useState({
+        userNo: 0,
+        id: "",
+        pw: "",
+        userType: null
+    });
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-            const response = await axios.post('/api/login', { id, password });
+            const response = await axios.post('/api/login', { id: data.id, pw: data.pw, userType: data.userType});
             console.log(response)
+            setData({
+                userNo: response.data[0].userNo,
+                id: response.data[0].id,
+                pw: response.data[0].pw,
+                userType: response.data[0].userType
+            });
+            console.log(data.userType);
+            if (data.userType == 'GUEST') {
+                navigate('/guest');
+            }
+            else if (data.userType == 'HOST') {
+                //id값을 넘겨주어야 함
+                navigate('/host');
+            }
+
             console.log('Login successful');
         } catch (error) {
-            console.log(id,password+'dd')
             console.log('Login failed');
         }
     };
@@ -33,8 +56,8 @@ export default function Main() {
                     name="id"
                     placeholder="id"
                     required=""
-                    value={id}
-                    onChange={(e) => setId(e.target.value)}
+                    value={data.id}
+                    onChange={(e) => setData({...data, id: e.target.value})}
                     />
                     <input
                     className="input"
@@ -42,12 +65,13 @@ export default function Main() {
                     name="pswd"
                     placeholder="Password"
                     required=""
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    value={data.pw}
+                    onChange={(e) => setData({...data, pw: e.target.value})}
                     />
                     <button type='submit'>Log in</button>
                 </form>
             </div>
+            <Register />
         </div>      
     );
 }

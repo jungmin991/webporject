@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const controller = require('../controllers/campGroundController.js');
+const controller = require('../controllers/campController.js');
 
 router.post('/campground/register', controller.register);
 router.post('/campground/getCampInfo', controller.getCampInfo);
