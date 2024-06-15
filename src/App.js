@@ -9,10 +9,8 @@ import {useState} from "react";
 import RegistCampGround3 from "./Owner/CampGround/RegistCampGround3";
 import CampingForm from './Owner/CampingForm';
 import CampingList from './Owner/CampingList';
-import CampingSearchForm from "./Reservation/CampingSearchForm";
-import RegistSite from "./Owner/CampGroundSite/RegistSite";
-import SiteList from "./Owner/CampGroundSite/SiteList";
-import ReservationList from "./Owner/CampGroundSite/ReservationList";
+import CampingSiteList from './Owner/CampingSiteList';
+import CampingSiteItem from './Owner/CampingSiteItem';
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -41,10 +39,8 @@ function App() {
                 <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
                 <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
-                <Route path='/SearchCampGround' element={<CampingSearchForm/>}/>
-                <Route path='/RegistSite/:campGroundNo' element={<RegistSite/>}/>
-                <Route path='/SiteList/:campGroundNo' element={<SiteList/>}/>
-                <Route path='/ReservationList/:hostNo' element={<ReservationList/>}/>
+                <Route path='/showSiteList/:groundNum' element={<CampingSiteList/>}/>
+                <Route path='/showSiteItem' element={<CampingSiteItem/>}/>
             </Routes>
         </div>
     );
