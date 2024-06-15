@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Register from './Register';
+
 
 
 
@@ -31,6 +33,7 @@ export default function Main() {
                 navigate('/guest');
             }
             else if (data.userType == 'HOST') {
+                //id값을 넘겨주어야 함
                 navigate('/host');
             }
 
@@ -68,6 +71,7 @@ export default function Main() {
                     <button type='submit'>Log in</button>
                 </form>
             </div>
+            <Register />
         </div>      
     );
 }
