@@ -24,7 +24,7 @@ export default function RegistCampGround({campGroundInfo, setCampGroundInfo}) {
             시간<br/></label>
         <label><input type='time' onChange={(e) => setCampGroundInfos("leaveTime", e.target.value)}/>캠핑장 퇴실
             시간<br/></label>
-        <Link to={'/RegistCampGround2'} onClick={() => setCampGroundInfo({...campGroundInfo, userNo: userNo})
+        <Link to={'/RegistCampGround2'} onClick={() => setCampGroundInfo({...campGroundInfo, userNo: userNo.id})
         }>next</Link>
     </div>
 }
