@@ -24,5 +24,6 @@ yarn-error.log*
 
 # local files
 /db
+/config/db.js
 /src/config/config.js
 
