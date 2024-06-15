@@ -12,7 +12,7 @@ const CampingList = () => {
     const [data, setData] = useState([]);
 
     function campings() {
-        axios.post(requestURL+'/campground/getCampInfo' , {userNo: userNo.id})
+        axios.post(requestURL+'/campground/campGroundList' , {userNo: userNo.id})
         .then((response) => {
             setData(response.data);
         })
@@ -27,6 +27,7 @@ const CampingList = () => {
             <h2>내가 등록한 캠핑장</h2>
             <div className="camping-list">
                 {campings()}
+                {console.log(data)}
                 {data.map((camping) => (
                     <CampingItem key={camping.campNo} camping={camping}/>
                 ))}
