@@ -2,6 +2,7 @@ import {useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
 import {requestURL} from "../config/config";
+import './css/Review.css'
 
 
 export default function Review() {
@@ -18,11 +19,16 @@ export default function Review() {
         navigate('/MyReservationList/'+campGroundNo.guestNo);
     }
 
-    return <div>
-        <label><input type="image" onChange={(e) => setReview({...review, image: e.target.value})}></input>리뷰 사진</label>
+    return( <div className="base">
+        <label className="">리뷰 사진</label>
+        <input className="imageInput" type="image" onChange={(e) => setReview({
+            ...review,
+            image: e.target.value
+        })}></input>
         <br/>
-        <label><input type="text" onChange={(e) => setReview({...review, review: e.target.value})}></input>리뷰 작성</label>
+        <label className="ReviewInput">리뷰 작성</label>
+        <div><input type="text" onChange={(e) => setReview({...review, review: e.target.value})}></input></div>
         <br/>
-        <button onClick={() => submit()}>리뷰 등록</button>
-    </div>
+        <button className="button" onClick={() => submit()}>리뷰 등록</button>
+    </div>)
 }

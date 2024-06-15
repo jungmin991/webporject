@@ -37,3 +37,43 @@
 .CampingSearchForm .btn:hover {
     background-color: #0011d7;
 }
+.CampingSearchForm .inputName {
+    background-color: white;
+    width: 100%; /* Adjusted to ensure it takes full width */
+    height: 25px;
+    padding: 10px; /* Added padding to improve appearance */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 16px;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+th, td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 20px;
+}
+
