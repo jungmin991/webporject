@@ -2,7 +2,7 @@ const conn = require('../db');
 
 const Camp = {
 
-    // 캠핑장 등록
+    // 캠핑장 사이트 정보 등록
     register: (req, res) => {
         const {
             userNo,
@@ -49,6 +49,15 @@ const Camp = {
     // 캠핑장 사이트 정보 조회
     getCampInfo: (req, res) => {
         conn.query("SELECT * FROM campground JOIN campgroundsite ON campground.campgroundNo = campgroundsite.campgroundNo WHERE userNo Like " + req.body.userNo, (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        })
+    },
+    getTest: (req, res) => {
+        conn.query("SELECT * FROM campground WHERE name LIKE ? AND type LIKE ? AND location LIKE ?", [req.body.name, req.body.type, req.body.local], (err, result) => {
             if (err) {
                 console.log(err)
             } else {

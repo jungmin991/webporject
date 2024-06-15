@@ -10,5 +10,7 @@ router.post('/campground/maxFacilities', controller.maxFacilities);
 router.post('/campground/registerFacilitiesInfo', controller.registerFacilitiesInfo);
 router.post('/campground/getMaxFacilitiesInfo', controller.getMaxFacilitiesInfo);
 
+router.post('/campground/getTest', controller.getTest);
+
 module.exports = router;
 
