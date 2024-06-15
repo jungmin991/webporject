@@ -60,10 +60,6 @@ export default function RegistFacilities({campGroundInfo, setCampGroundInfo}) {
                 );
             })
         }
-        <Link to={'/RegistCampGround3'} onClick={() => registFacilities()}>next</Link>
-        <button onClick={() => {
-            registFacilities()
-        }}>submit
-        </button>
+        <Link to={'/RegistCampGround3'} onClick={()  => registFacilities()}>next</Link>
     </div>
 }

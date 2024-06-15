@@ -4,7 +4,6 @@ import {Link, useParams} from "react-router-dom";
 
 export default function RegistCampGround({campGroundInfo, setCampGroundInfo}) {
     const userNo = useParams();
-    setCampGroundInfo({...campGroundInfo, userNo: userNo})
     const setCampGroundInfos = (type, value) => {
         setCampGroundInfo({
             ...campGroundInfo, [type]: value
@@ -25,6 +24,7 @@ export default function RegistCampGround({campGroundInfo, setCampGroundInfo}) {
             시간<br/></label>
         <label><input type='time' onChange={(e) => setCampGroundInfos("leaveTime", e.target.value)}/>캠핑장 퇴실
             시간<br/></label>
-        <Link to={'/RegistCampGround2'} onClick={() => console.log("asdf" + campGroundInfo)}>next</Link>
+        <Link to={'/RegistCampGround2'} onClick={() => setCampGroundInfo({...campGroundInfo, userNo: userNo})
+        }>next</Link>
     </div>
 }
