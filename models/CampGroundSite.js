@@ -18,7 +18,7 @@ const CampGroundSite = {
     siteList: (req, res) => {
         console.log(req.body.userNo);
         //받아올 row 설정
-        conn.query("SELECT * FROM campground JOIN campgroundsite ON campground.campgroundNo = campgroundsite.campgroundNo WHERE userNo Like " + req.body.userNo, (err, result) => {
+        conn.query("SELECT * FROM campground JOIN campgroundsite ON campground.campgroundNo = campgroundsite.campgroundNo WHERE userNo = ? AND campground.campgroundNo = ?", [req.body.id, req.body.groundNum], (err, result) => {
             if (err) {
                 console.log(err);
             } else {

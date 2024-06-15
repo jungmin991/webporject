@@ -58,7 +58,7 @@ function App() {
                 <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
                 <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
-                <Route path='/showSiteList/:groundNum' element={<CampingSiteList/>}/>
+                <Route path='/showSiteList/:id/:groundNum' element={<CampingSiteList/>}/>
                 <Route path='/showSiteItem' element={<CampingSiteItem/>}/>
             </Routes>
         </div>

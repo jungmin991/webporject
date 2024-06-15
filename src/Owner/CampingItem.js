@@ -7,7 +7,7 @@ export default function CampingItem({camping}) {
     const navigate = useNavigate();
 
     const onclick = async() => {
-        navigate('/showSiteList/' + camping.userNo);
+        navigate('/showSiteList/' + camping.userNo + '/' + camping.campGroundNo);
     }
 
     return (
