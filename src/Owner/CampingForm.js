@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import './css/campRegister.css'
 
 const CampingForm = () => {
     const [formData, setFormData] = useState({
-        campingType: '',
+        campingType: 'CAMPING',
         campingName: '',
         address: '',
         contact: '',
         description: '',
         checkInTime: '',
         checkOutTime: '',
-        amenities: '',
         mainImage: null,
         mannerTimeStart: '',
         mannerTimeEnd: '',
@@ -22,18 +20,18 @@ const CampingForm = () => {
     });
 
     const handleChange = (e) => {
-        const { name, value, type, checked, files } = e.target;
+        const {name, value, type, checked, files} = e.target;
         if (type === 'checkbox') {
             setFormData((prevData) => {
                 const updatedArray = checked
                     ? [...prevData[name], value]
                     : prevData[name].filter((item) => item !== value);
-                return { ...prevData, [name]: updatedArray };
+                return {...prevData, [name]: JSON.stringify(updatedArray)};
             });
         } else if (type === 'file') {
-            setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
+            setFormData((prevData) => ({...prevData, [name]: files[0]}));
         } else {
-            setFormData((prevData) => ({ ...prevData, [name]: value }));
+            setFormData((prevData) => ({...prevData, [name]: value}));
         }
     };
 
@@ -45,6 +43,12 @@ const CampingForm = () => {
             console.log('Form submitted successfully:', response.data);
         }
         catch (err) {
+            console.error('Error submitting form:', err);
+        console.log(formData)
+        try {
+            const response = await axios.post('/campground/register', formData)
+            console.log('Form submitted successfully:', response.data);
+        } catch (err) {
             console.error('Error submitting form:', err);
         }
     };
@@ -66,70 +70,92 @@ const CampingForm = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="campingName">캠핑장 이름</label>
-                    <input type="text" id="campingName" name="campingName" onChange={handleChange} value={formData.campingName} required />
+                    <input type="text" id="campingName" name="campingName" onChange={handleChange}
+                           value={formData.campingName} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="address">주소</label>
-                    <input type="text" id="address" name="address" onChange={handleChange} value={formData.address} required />
+                    <input type="text" id="address" name="address" onChange={handleChange} value={formData.address}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="contact">연락처</label>
-                    <input type="tel" id="contact" name="contact" onChange={handleChange} value={formData.contact} required />
+                    <input type="tel" id="contact" name="contact" onChange={handleChange} value={formData.contact}
+                           required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">숙소 소개</label>
-                    <textarea id="description" name="description" onChange={handleChange} value={formData.description} required></textarea>
+                    <textarea id="description" name="description" onChange={handleChange} value={formData.description}
+                              required></textarea>
                 </div>
                 <div className="form-group">
                     <label htmlFor="checkInTime">입실 시간</label>
-                    <input type="time" id="checkInTime" name="checkInTime" onChange={handleChange} value={formData.checkInTime} />
+                    <input type="time" id="checkInTime" name="checkInTime" onChange={handleChange}
+                           value={formData.checkInTime}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="checkOutTime">퇴실 시간</label>
-                    <input type="time" id="checkOutTime" name="checkOutTime" onChange={handleChange} value={formData.checkOutTime} />
+                    <input type="time" id="checkOutTime" name="checkOutTime" onChange={handleChange}
+                           value={formData.checkOutTime}/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="amenities">숙소 편의시설</label>
-                    <textarea id="amenities" name="amenities" onChange={handleChange} value={formData.amenities} required></textarea>
+                    <textarea id="amenities" name="amenities" onChange={handleChange} value={formData.amenities}
+                              required></textarea>
                 </div>
                 <div className="form-group">
                     <label htmlFor="mainImage">대표사진</label>
-                    <input type="file" id="mainImage" name="mainImage" accept="image/*" onChange={handleChange} required />
+                    <input type="file" id="mainImage" name="mainImage" accept="image/*" required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="mannerTimeStart">매너타임 시작</label>
-                    <input type="time" id="mannerTimeStart" name="mannerTimeStart" onChange={handleChange} value={formData.mannerTimeStart} required />
+                    <input type="time" id="mannerTimeStart" name="mannerTimeStart" onChange={handleChange}
+                           value={formData.mannerTimeStart} required/>
                 </div>
                 <div className="form-group">
                     <label htmlFor="mannerTimeEnd">매너타임 종료</label>
-                    <input type="time" id="mannerTimeEnd" name="mannerTimeEnd" onChange={handleChange} value={formData.mannerTimeEnd} required />
+                    <input type="time" id="mannerTimeEnd" name="mannerTimeEnd" onChange={handleChange}
+                           value={formData.mannerTimeEnd} required/>
                 </div>
                 <div className="form-group">
                     <label>부대시설</label>
                     <div className="checkbox-group">
-                        <label><input type="checkbox" name="facilities" value="공용 샤워실" onChange={handleChange} checked={formData.facilities.includes("공용 샤워실")} />공용 샤워실</label>
-                        <label><input type="checkbox" name="facilities" value="공용 화장실" onChange={handleChange} checked={formData.facilities.includes("공용 화장실")} />공용 화장실</label>
-                        <label><input type="checkbox" name="facilities" value="개수대" onChange={handleChange} checked={formData.facilities.includes("개수대")} />개수대</label>
-                        <label><input type="checkbox" name="facilities" value="공용주차장" onChange={handleChange} checked={formData.facilities.includes("공용주차장")} />공용주차장</label>
-                        <label><input type="checkbox" name="facilities" value="편의점" onChange={handleChange} checked={formData.facilities.includes("편의점")} />편의점</label>
+                        <label><input type="checkbox" name="facilities" value="공용 샤워실" onChange={handleChange}
+                        />공용 샤워실</label>
+                        <label><input type="checkbox" name="facilities" value="공용 화장실" onChange={handleChange}
+                        />공용 화장실</label>
+                        <label><input type="checkbox" name="facilities" value="개수대" onChange={handleChange}
+                        />개수대</label>
+                        <label><input type="checkbox" name="facilities" value="공용주차장" onChange={handleChange}
+                        />공용주차장</label>
+                        <label><input type="checkbox" name="facilities" value="편의점" onChange={handleChange}
+                        />편의점</label>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="activities">놀거리</label>
                     <div className="checkbox-group">
-                        <label><input type="checkbox" name="activities" value="낚시" onChange={handleChange} checked={formData.activities.includes("낚시")} />낚시</label>
-                        <label><input type="checkbox" name="activities" value="하이킹" onChange={handleChange} checked={formData.activities.includes("하이킹")} />하이킹</label>
-                        <label><input type="checkbox" name="activities" value="수영" onChange={handleChange} checked={formData.activities.includes("수영")} />수영</label>
-                        <label><input type="checkbox" name="activities" value="보드게임" onChange={handleChange} checked={formData.activities.includes("보드게임")} />보드게임</label>
-                        <label><input type="checkbox" name="activities" value="자전거 타기" onChange={handleChange} checked={formData.activities.includes("자전거 타기")} />자전거 타기</label>
+                        <label><input type="checkbox" name="activities" value="낚시" onChange={handleChange}
+                                      checked={formData.activities.includes("낚시")}/>낚시</label>
+                        <label><input type="checkbox" name="activities" value="하이킹" onChange={handleChange}
+                                      checked={formData.activities.includes("하이킹")}/>하이킹</label>
+                        <label><input type="checkbox" name="activities" value="수영" onChange={handleChange}
+                                      checked={formData.activities.includes("수영")}/>수영</label>
+                        <label><input type="checkbox" name="activities" value="보드게임" onChange={handleChange}
+                                      checked={formData.activities.includes("보드게임")}/>보드게임</label>
+                        <label><input type="checkbox" name="activities" value="자전거 타기" onChange={handleChange}
+                                      checked={formData.activities.includes("자전거 타기")}/>자전거 타기</label>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="environment">주변환경</label>
                     <div className="checkbox-group">
-                        <label><input type="checkbox" name="environment" value="산" onChange={handleChange} checked={formData.environment.includes("산")} />산</label>
-                        <label><input type="checkbox" name="environment" value="계곡" onChange={handleChange} checked={formData.environment.includes("계곡")} />계곡</label>
-                        <label><input type="checkbox" name="environment" value="등산로" onChange={handleChange} checked={formData.environment.includes("등산로")} />등산로</label>
+                        <label><input type="checkbox" name="environment" value="산" onChange={handleChange}
+                                      checked={formData.environment.includes("산")}/>산</label>
+                        <label><input type="checkbox" name="environment" value="계곡" onChange={handleChange}
+                                      checked={formData.environment.includes("계곡")}/>계곡</label>
+                        <label><input type="checkbox" name="environment" value="등산로" onChange={handleChange}
+                                      checked={formData.environment.includes("등산로")}/>등산로</label>
                     </div>
                 </div>
                 <div className="form-group">
@@ -151,9 +177,8 @@ const CampingForm = () => {
                     address: '',
                     contact: '',
                     description: '',
-                    checkInTime: '',
-                    checkOutTime: '',
-                    amenities: '',
+                    checkInTime: null,
+                    checkOutTime: null,
                     mainImage: null,
                     mannerTimeStart: '',
                     mannerTimeEnd: '',
@@ -161,7 +186,8 @@ const CampingForm = () => {
                     activities: [],
                     environment: [],
                     localType: '',
-                })}>취소</button>
+                })}>취소
+                </button>
             </form>
         </div>
     );

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Register from './Register';
-
-
+import {requestURL} from "../config/config";
 
 
 export default function Main() {
@@ -20,7 +19,11 @@ export default function Main() {
         event.preventDefault();
 
         try {
-            const response = await axios.post('/api/login', { id: data.id, pw: data.pw, userType: data.userType});
+            const response = await axios.post(requestURL + '/api/login', {
+                id: data.id,
+                pw: data.pw,
+                userType: data.userType
+            });
             console.log(response)
             setData({
                 userNo: response.data[0].userNo,
@@ -31,8 +34,7 @@ export default function Main() {
             console.log(data.userType);
             if (data.userType == 'GUEST') {
                 navigate('/guest');
-            }
-            else if (data.userType == 'HOST') {
+            } else if (data.userType == 'HOST') {
                 navigate('/host/' + data.userNo);
             }
 
@@ -47,30 +49,30 @@ export default function Main() {
             <div className="login">
                 <form className="form" onSubmit={handleSubmit}>
                     <label htmlFor="chk" aria-hidden="true">
-                    Log in
+                        Log in
                     </label>
                     <input
-                    className="input"
-                    type="id"
-                    name="id"
-                    placeholder="id"
-                    required=""
-                    value={data.id}
-                    onChange={(e) => setData({...data, id: e.target.value})}
+                        className="input"
+                        type="id"
+                        name="id"
+                        placeholder="id"
+                        required=""
+                        value={data.id}
+                        onChange={(e) => setData({...data, id: e.target.value})}
                     />
                     <input
-                    className="input"
-                    type="password"
-                    name="pswd"
-                    placeholder="Password"
-                    required=""
-                    value={data.pw}
-                    onChange={(e) => setData({...data, pw: e.target.value})}
+                        className="input"
+                        type="password"
+                        name="pswd"
+                        placeholder="Password"
+                        required=""
+                        value={data.pw}
+                        onChange={(e) => setData({...data, pw: e.target.value})}
                     />
                     <button type='submit'>Log in</button>
                 </form>
             </div>
-            <Register />
-        </div>      
+            <Register/>
+        </div>
     );
 }

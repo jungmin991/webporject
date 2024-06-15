@@ -16,3 +16,18 @@ exports.campGroundList = (req, res) => {
     camp.campGroundList(req, res);
 }
 
+exports.insertFacilities = (req, res) => {
+    camp.insertFacilities(req, res);
+}
+
+exports.maxFacilities = (req, res) => {
+    camp.maxFacilities(req, res);
+}
+
+exports.registerFacilitiesInfo = (req, res) => {
+    camp.registerFacilitiesInfo(req, res);
+}
+
+exports.getMaxFacilitiesInfo = (req, res) => {
+    camp.getMaxFacilitiesInfo(req, res);
+}
