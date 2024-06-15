@@ -9,6 +9,9 @@ import {useState} from "react";
 import RegistCampGround3 from "./Owner/CampGround/RegistCampGround3";
 import CampingForm from './Owner/CampingForm';
 import CampingList from './Owner/CampingList';
+import CampingSearchForm from "./Reservation/CampingSearchForm";
+import RegistSite from "./Owner/CampGroundSite/RegistSite";
+import SiteList from "./Owner/CampGroundSite/SiteList";
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -37,6 +40,9 @@ function App() {
                 <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
                 <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
+                <Route path='/SearchCampGround' element={<CampingSearchForm/>}/>
+                <Route path='/RegistSite/:campGroundNo' element={<RegistSite/>}/>
+                <Route path='/SiteList/:campGroundNo' element={<SiteList/>}/>
             </Routes>
         </div>
     );

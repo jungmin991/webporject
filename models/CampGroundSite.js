@@ -1,4 +1,4 @@
-const conn = require('../db');
+    const conn = require('../db');
 
 const CampGroundSite = {
     // 캠핑장 사이트 등록

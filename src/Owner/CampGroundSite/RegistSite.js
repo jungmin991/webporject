@@ -1,10 +1,13 @@
 import axios from "axios";
 import {useState} from "react";
+import {useParams} from "react-router-dom";
+import {requestURL} from "../../config/config";
 
 export default function RegistSite() {
+
     const [siteInfos, setSiteInfos] = useState({
         siteNo: 0,
-        campGroundNo: 13,
+        campGroundNo: useParams().campGroundNo,
         campGroundImages: JSON.stringify(),
         price: 0,
         peopleNum: 0,
@@ -12,18 +15,18 @@ export default function RegistSite() {
     })
 
     function registSite() {
-        axios.post("/siteRegist", siteInfos).then((res) => {
+        axios.post(requestURL + "/campsite/register", siteInfos).then((res) => {
             console.log(res.data);
         })
     }
 
-    function setSiteInfo(type, value){
-        setSiteInfos({...siteInfos,[type]:value})
+    function setSiteInfo(type, value) {
+        setSiteInfos({...siteInfos, [type]: value})
     }
 
     return <div>
         <label><input type="text" onChange={(e) => {
-            setSiteInfo("siteNo",parseInt(e.target.value))
+            setSiteInfo("siteNo", parseInt(e.target.value))
         }}/>사이트 번호 <br/> </label>
         <label><input type="type" onChange={(e) => {
             setSiteInfo("price", parseInt(e.target.value))

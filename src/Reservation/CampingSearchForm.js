@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import axios from "axios";
+import {requestURL} from "../config/config";
 
 const Camp = {
     name: '',
@@ -33,10 +34,10 @@ const Search = () => {
         }
 
 
-        const searchData = { name: searchName, type: searchType, local: searchLocal };
+        const searchData = {name: searchName, type: searchType, local: searchLocal};
         try {
             console.log(searchData);
-            const response = await axios.post('/campground/getTest', searchData);
+            const response = await axios.post(requestURL + '/campground/getTest', searchData);
             setCamps(response.data);
             console.log(camps)
         } catch (err) {
@@ -47,7 +48,7 @@ const Search = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="캠핑장 이름" />
+                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="캠핑장 이름"/>
                 <select type="text" value={local} onChange={(e) => setLocal(e.target.value)} placeholder="지역">
                     <option value="all">모두</option>
                     <option value="gangwon">강원도</option>
@@ -64,8 +65,8 @@ const Search = () => {
                     <option value="CARAVAN">카라반</option>
                     <option value="PENSION">펜션</option>
                 </select>
-                <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="입실일" />
-                <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="퇴실일" />
+                <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="입실일"/>
+                <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="퇴실일"/>
                 <button type="submit">검색</button>
             </form>
             <div>
