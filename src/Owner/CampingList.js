@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './css/myRegistCamp.css'
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import CampingItem from './CampingItem';
 import {requestURL} from '../config/config';
 
 const CampingList = () => {
-
+    const navigate = useNavigate();
     const userNo = useParams();
 
     const [data, setData] = useState([]);
@@ -21,9 +21,6 @@ const CampingList = () => {
         });
     }
 
-    
-
-
 
     return (
         <div>
@@ -31,10 +28,13 @@ const CampingList = () => {
             <div className="camping-list">
                 {campings()}
                 {data.map((camping) => (
-                    <CampingItem key={camping.campNo} camping={camping} />
+                    <CampingItem key={camping.campNo} camping={camping}/>
                 ))}
             </div>
-            <button className="add-button">캠핑장 추가</button>
+            <button className="add-button" onClick={() => {
+                navigate('/RegistCampGround1/' + userNo.id)
+            }}>캠핑장 추가
+            </button>
         </div>
     );
 };

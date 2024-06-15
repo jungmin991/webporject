@@ -12,7 +12,7 @@ import CampingList from './Owner/CampingList';
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
-            userNo: 1,
+            userNo: -1,
             facilitiesInfoNo: -1,
             mannerStartTime: null,
             mannerEndTime: null,
@@ -33,7 +33,8 @@ function App() {
                 <Route path='/' element={<Main/>}/>
                 <Route path='/login' element={<Login/>}/>
                 <Route path='/register' element={<Register/>}/>
-                <Route path='/host/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
+                <Route path='/host/:id' element={<CampingList/>}/>
+                <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
                 <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
             </Routes>

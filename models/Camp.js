@@ -6,30 +6,37 @@ const Camp = {
     register: (req, res) => {
         const {
             userNo,
-            campingType,
-            campingName,
-            address,
-            contact,
-            description,
-            checkInTime,
-            checkOutTime,
-            mainImage,
-            mannerTimeStart,
-            mannerTimeEnd,
-            facilities,
-            activities,
-            environment,
-            localType
+            facilitiesInfoNo,
+            mannerStartTime,
+            mannerEndTime,
+            campGroundImages,
+            name,
+            location,
+            type,
+            callNum,
+            campingInfo,
+            enterTime,
+            leaveTime
         } = req.body;
         conn.query(
             `
-                INSERT INTO campground (userNo, type, name, location, callNum, campingInfo, enterTime, leaveTime,
-                                        campGroundImages, mannerStartTime, mannerEndTime, facilities, activities,
-                                        environment, localType)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT INTO campground (userNo, facilitiesInfoNo, mannerStartTime, mannerEndTime, campGroundImages,
+                                        name, location, type, callNum, campingInfo, enterTime, leaveTime)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             `,
             [
-                userNo, campingType, campingName, address, contact, description, checkInTime, checkOutTime, mainImage, mannerTimeStart, mannerTimeEnd, facilities, activities, environment, localType
+                userNo,
+                facilitiesInfoNo,
+                mannerStartTime,
+                mannerEndTime,
+                campGroundImages,
+                name,
+                location,
+                type,
+                callNum,
+                campingInfo,
+                enterTime,
+                leaveTime
             ], (err, result) => {
                 if (err) {
                     console.log(err)
@@ -61,7 +68,7 @@ const Camp = {
         })
     },
 
-    // 자신의 캠핑장 정보 조회
+    // 게스트가 자신의 캠핑장 정보 조회 → 리뷰 작성
     mySiteList: (req, res) => {
         const query =
             'select name, siteName, state, campground.campGroundNo ' +
