@@ -1,8 +1,8 @@
 import axios from "axios";
-import { useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import CampingSiteItem from "./CampingSiteItem";
-import { requestURL } from "../config/config";
-import { useState } from "react";
+import {requestURL} from "../config/config";
+import {useState} from "react";
 
 export default function CampingSiteList() {
 
@@ -20,7 +20,7 @@ export default function CampingSiteList() {
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
-    
+
     }
 
     const moveMypage = () => {
@@ -28,7 +28,7 @@ export default function CampingSiteList() {
     }
 
     const registerSite = () => {
-        navigate('/RegistSite/' + user.groundNum);
+        navigate('/RegistSite/' + user.id + '/'  + user.groundNum);
     }
 
     return (
@@ -37,7 +37,7 @@ export default function CampingSiteList() {
             <div className="camping-list">
                 {sites()}
                 {data.map((site) => (
-                    <CampingSiteItem key={site.siteNo} site={site} />
+                    <CampingSiteItem key={site.siteNo} site={site}/>
                 ))}
             </div>
             <button onClick={moveMypage}>마이페이지로</button>

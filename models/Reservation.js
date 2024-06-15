@@ -13,6 +13,7 @@ const Reservation = {
 
     // 예약 정보 수정
     modify: (req, res) => {
+        console.log(req.body)
         conn.query('UPDATE reservation SET state= \''+ req.body.state +'\' WHERE reservationNo LIKE ' + req.body.reservationNo, (err, result) => {
             if (err) {
                 console.log(err);

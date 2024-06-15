@@ -1,13 +1,14 @@
 import axios from "axios";
 import {useState} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {requestURL} from "../../config/config";
 
 export default function RegistSite() {
-
+    const navigate = useNavigate();
+    const info = useParams();
     const [siteInfos, setSiteInfos] = useState({
         siteNo: 0,
-        campGroundNo: useParams().campGroundNo,
+        campGroundNo: info.campGroundNo,
         campGroundImages: JSON.stringify(),
         price: 0,
         peopleNum: 0,
@@ -18,6 +19,7 @@ export default function RegistSite() {
         axios.post(requestURL + "/campsite/register", siteInfos).then((res) => {
             console.log(res.data);
         })
+        navigate('/showSiteList/' + info.hostNo + '/' + info.campGroundNo)
     }
 
     function setSiteInfo(type, value) {

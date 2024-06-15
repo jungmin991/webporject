@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import './css/CampingSearchForm.css'
 import axios from "axios";
 import {requestURL} from "../config/config";
+import {useNavigate} from "react-router-dom";
 
 const Camp = {
     name: '',
@@ -15,7 +16,8 @@ const Search = () => {
     const [type, setType] = useState('%');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
-
+    const [isDetail, setIsDetail] = useState(false);
+    const navigate = useNavigate();
     const [camps, setCamps] = useState([Camp])
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -106,22 +108,22 @@ const Search = () => {
             <div>
                 {camps.length > 0 ? (
                     <table>
-                    <thead>
+                        <thead>
                         <tr>
                             <th>이름</th>
                             <th>유형</th>
                             <th>위치</th>
                         </tr>
                         </thead>
-                        <tbody>
                         {camps.map((camp, index) => (
+                            <tbody>
                             <tr key={index}>
                                 <td>{camp.name}</td>
                                 <td>{camp.type}</td>
                                 <td>{camp.location}</td>
                             </tr>
+                            </tbody>
                         ))}
-                        </tbody>
                     </table>
                 ) : (
                     <p>검색 결과가 없습니다.</p>

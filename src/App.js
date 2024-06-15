@@ -16,7 +16,6 @@ import MyReservationList from "./Guest/MyReservationList";
 import Review from "./Guest/Review";
 import CampingSiteList from './Owner/CampingSiteList';
 import CampingSiteItem from './Owner/CampingSiteItem';
-import search from './Reservation/CampingSearchForm'
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -49,7 +48,7 @@ function App() {
                 <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo}
                                                                              setCampGroundInfo={setCampGroundInfo}/>}/>;
                 <Route path='/SearchCampGround/:guestNo' element={<CampingSearchForm/>}/>
-                <Route path='/RegistSite/:campGroundNo' element={<RegistSite/>}/>
+                <Route path='/RegistSite/:hostNo/:campGroundNo' element={<RegistSite/>}/>
                 <Route path='/SiteList/:campGroundNo' element={<SiteList/>}/>
                 <Route path='/ReservationList/:hostNo' element={<ReservationList/>}/>
                 <Route path='/MyReservationList/:guestNo' element={<MyReservationList/>}/>
