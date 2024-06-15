@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CampingSiteItem from "./CampingSiteItem";
 import { requestURL } from "../config/config";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function CampingSiteList() {
 
     const user = useParams();
+    const navigate = useNavigate();
 
     const [data, setData] = useState([]);
 
@@ -15,12 +16,19 @@ export default function CampingSiteList() {
         axios.post(requestURL + '/campsite/siteList', user)
             .then((response) => {
                 setData(response.data);
-                console.log(response.data);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
             });
     
+    }
+
+    const moveMypage = () => {
+        navigate('/host/' + user.id);
+    }
+
+    const registerSite = () => {
+        navigate('/RegistSite/' + user.groundNum);
     }
 
     return (
@@ -32,6 +40,8 @@ export default function CampingSiteList() {
                     <CampingSiteItem key={site.siteNo} site={site} />
                 ))}
             </div>
+            <button onClick={moveMypage}>마이페이지로</button>
+            <button onClick={registerSite}>사이트등록</button>
         </div>
     );
 }
