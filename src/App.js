@@ -4,6 +4,7 @@ import Main from './components/Main';
 import Login from './components/Login';
 import Register from './components/Register';
 import CampingForm from './Owner/CampingForm';
+import CampingList from './Owner/CampingList';
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
-        <Route path='/host' element={<CampingForm />} />
+        <Route path='/host/:id' element={<CampingList />} />
       </Routes>
     </div>
   );

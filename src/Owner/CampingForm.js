@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './css/campRegister.css'
 
-const CampingForm = ({ addCamping }) => {
+const CampingForm = () => {
     const [formData, setFormData] = useState({
         campingType: '',
         campingName: '',
@@ -38,45 +39,13 @@ const CampingForm = ({ addCamping }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const data = new FormData();
-        for (const key in formData) {
-            if (formData[key] instanceof Array) {
-                formData[key].forEach((value) => {
-                    data.append(`${key}[]`, value);
-                });
-            } else {
-                data.append(key, formData[key]);
-            }
+        console.log(formData)
+        try{
+            const response = await axios.port('/campground/register', formData)
+            console.log('Form submitted successfully:', response.data);
         }
-
-        try {
-            const response = await axios.post('/campground/register', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            });
-            console.log('Response:', response.data);
-            addCamping(response.data);
-            setFormData({
-                campingType: '',
-                campingName: '',
-                address: '',
-                contact: '',
-                description: '',
-                checkInTime: '',
-                checkOutTime: '',
-                amenities: '',
-                mainImage: null,
-                mannerTimeStart: '',
-                mannerTimeEnd: '',
-                facilities: [],
-                activities: [],
-                environment: [],
-                localType: '',
-            });
-        } catch (err) {
-            console.error('Error:', err);
+        catch (err) {
+            console.error('Error submitting form:', err);
         }
     };
 
