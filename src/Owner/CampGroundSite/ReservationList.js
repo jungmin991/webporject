@@ -1,11 +1,15 @@
 import axios from "axios";
 import {useState} from "react";
+import {requestURL} from "../../config/config";
+import {useParams} from "react-router-dom";
 
-export default function ReservationList(userNo) {
+export default function ReservationList() {
+    const userNo = useParams();
     const [reservationLists, setReservationLists] = useState([]);
 
     function reservationList(userNo) {
-        axios.post("/reservationList", userNo).then((res) => {
+        console.log(userNo.hostNo);
+        axios.post(requestURL + "/reservation/list", {hostNo : userNo.hostNo}).then((res) => {
             setReservationLists(res.data);
             console.log(res.data);
         })
