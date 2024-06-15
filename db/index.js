@@ -1,5 +1,5 @@
 const config = require('../config/db.js');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 
 //연결 설정 세팅
 const con = mysql.createConnection(config);

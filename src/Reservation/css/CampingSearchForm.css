@@ -1,0 +1,39 @@
+.CampingSearchForm {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.CampingSearchForm form {
+    max-width: 50%;
+    margin: 0 auto;
+}
+
+.CampingSearchForm .form-group {
+    flex-basis: 48%;
+    margin-bottom: 20px;
+}
+
+.CampingSearchForm .form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.CampingSearchForm .btn {
+    background-color: #5656fd;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.CampingSearchForm .btn:hover {
+    background-color: #0011d7;
+}

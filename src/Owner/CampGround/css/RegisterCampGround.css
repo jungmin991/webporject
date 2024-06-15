@@ -1,0 +1,94 @@
+.RegistCampForm {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+.RegistCampFormDiv input,
+.RegistCampFormDiv label{
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+    max-width: 700px;
+    margin: 0 auto 10px auto;
+}
+
+.RegistCampFormDiv input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+.parent {
+    position: relative;
+}
+
+.linkName {
+    position: absolute;
+    top: 145%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 200px;
+    text-align: center;
+}
+
+.linkName:hover {
+    background-color: #0056b3;
+}
+
+
+
+
+.RegistCampForm {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.CampGroundRegistForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.CampGroundRegistForm .form-group {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.CampGroundRegistForm label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.CampGroundRegistForm input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.CampGroundRegistForm .btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.CampGroundRegistForm .btn:hover {
+    background-color: #0056b3;
+}

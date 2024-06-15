@@ -1,7 +1,7 @@
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
-import Main from './components/Main';
-import Login from './components/Login';
+import Login from './components/Main';
+import Main from './components/Login';
 import Register from './components/Register';
 import RegistFacilities from "./Owner/CampGround/RegistFacilities";
 import RegistCampGroundInfo from './Owner/CampGround/RegistCampGroundInfo';
@@ -17,6 +17,7 @@ import MyReservationList from "./Guest/MyReservationList";
 import Review from "./Guest/Review";
 import CampingSiteList from './Owner/CampingSiteList';
 import CampingSiteItem from './Owner/CampingSiteItem';
+import search from './Reservation/CampingSearchForm'
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -38,8 +39,8 @@ function App() {
     return (
         <div className='App'>
             <Routes>
-                <Route path='/' element={<Main/>}/>
-                <Route path='/login' element={<Login/>}/>
+                <Route path='/' element={<Login/>}></Route>
+                <Route path='/Main' element={<Main/>}/>
                 <Route path='/register' element={<Register/>}/>
                 <Route path='/host/:id' element={<CampingList/>}/>
                 <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo}

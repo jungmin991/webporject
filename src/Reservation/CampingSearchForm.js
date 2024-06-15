@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import './css/CampingSearchForm.css'
 import axios from "axios";
 import {requestURL} from "../config/config";
 
@@ -46,10 +47,19 @@ const Search = () => {
     };
 
     return (
-        <div>
+        <div lassName="CampingSearchForm">
             <form onSubmit={handleSubmit}>
-                <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="캠핑장 이름"/>
-                <select type="text" value={local} onChange={(e) => setLocal(e.target.value)} placeholder="지역">
+                <div className="form-group">
+                    <input
+                        type="text"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        placeholder="캠핑장 이름"
+                        className="form-control"
+                    />
+                </div>
+                <select className="form-group" type="text" value={local} onChange={(e) => setLocal(e.target.value)}
+                        placeholder="지역">
                     <option value="all">모두</option>
                     <option value="gangwon">강원도</option>
                     <option value="gyeongsang">경상도</option>
@@ -58,21 +68,45 @@ const Search = () => {
                     <option value="chungcheong">충청도</option>
                     <option value="jeju">제주도</option>
                 </select>
-                <select value={type} onChange={(e) => setType(e.target.value)}>
-                    <option value="all">모두</option>
-                    <option value="CAMPING">캠핑</option>
-                    <option value="GLAMPING">글램핑</option>
-                    <option value="CARAVAN">카라반</option>
-                    <option value="PENSION">펜션</option>
-                </select>
-                <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} placeholder="입실일"/>
-                <input type="date" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} placeholder="퇴실일"/>
-                <button type="submit">검색</button>
+                <div className="form-group">
+                    <select
+                        value={type}
+                        onChange={(e) => setType(e.target.value)}
+                        className="form-control"
+                    >
+                        <option value="all">모두</option>
+                        <option value="CAMPING">캠핑</option>
+                        <option value="GLAMPING">글램핑</option>
+                        <option value="CARAVAN">카라반</option>
+                        <option value="PENSION">펜션</option>
+                    </select>
+                </div>
+                <div className="form-group">
+                    <input
+                        type="date"
+                        value={checkIn}
+                        onChange={(e) => setCheckIn(e.target.value)}
+                        placeholder="입실일"
+                        className="form-control"
+                    />
+                </div>
+                <div className="form-group">
+                    <input
+                        type="date"
+                        value={checkOut}
+                        onChange={(e) => setCheckOut(e.target.value)}
+                        placeholder="퇴실일"
+                        className="form-control"
+                    />
+                </div>
+                <div className="form-group">
+                    <button type="submit" className="btn">검색</button>
+                </div>
             </form>
             <div>
                 {camps.length > 0 ? (
                     <table>
-                        <thead>
+                    <thead>
                         <tr>
                             <th>이름</th>
                             <th>유형</th>

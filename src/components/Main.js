@@ -3,6 +3,7 @@ import axios from 'axios';
 import {useNavigate} from 'react-router-dom';
 import Register from './Register';
 import {requestURL} from "../config/config";
+import './css/login.css';
 
 
 export default function Main() {
@@ -69,10 +70,10 @@ export default function Main() {
                         value={data.pw}
                         onChange={(e) => setData({...data, pw: e.target.value})}
                     />
-                    <button type='submit'>Log in</button>
+                    <button type='submit'>로그인</button>
                 </form>
             </div>
-            <Register/>
+            <button type='submit'>회원가입</button>
         </div>
     );
 }

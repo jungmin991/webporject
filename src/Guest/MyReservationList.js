@@ -23,7 +23,7 @@ export default function MyReservationList() {
         getReservationList();
     }, []);
 
-    return <div>
+    return( <div>
         {myReservationList.map((reservation, index) => (
             <div>
                 <span> {reservation.name}</span>
@@ -35,4 +35,5 @@ export default function MyReservationList() {
             </div>
         ))}
     </div>
+    )
 }
