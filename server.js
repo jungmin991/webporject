@@ -9,7 +9,7 @@ const port = 9009;
 const multer = require('multer');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, 'uploads/');
+    cb(null, 'public/uploads/');
   },
   filename: (req, file, cb) => {
     cb(null, `${Date.now()}-${file.originalname}`);
@@ -17,11 +17,11 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-// Ensure the 'uploads' directory exists
+// Ensure the 'public/uploads' directory exists
 const fs = require('fs');
-const uploadsDir = path.join(__dirname, 'uploads');
+const uploadsDir = path.join(__dirname, 'public', 'uploads');
 if (!fs.existsSync(uploadsDir)) {
-  fs.mkdirSync(uploadsDir);
+  fs.mkdirSync(uploadsDir, { recursive: true });
 }
 
 // Serve static files
@@ -52,11 +52,6 @@ app.post('/upload', upload.single('file'), (req, res) => {
   }
   res.send(`${req.file.filename}`);
 });
-
-// Serve React app
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(__dirname, 'build', 'index.html'));
-// });
 
 app.listen(port, hostname, function () {
   console.log(`Server running at http://${hostname}:${port}/`);
