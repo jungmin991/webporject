@@ -9,16 +9,19 @@ export default function RegistSite() {
     const [siteInfos, setSiteInfos] = useState({
         siteNo: 0,
         campGroundNo: info.campGroundNo,
-        campGroundImages: JSON.stringify(),
+        campGroundImages: JSON.stringify([]),
         price: 0,
         peopleNum: 0,
         siteName: ""
     })
 
-    function registSite() {
-        axios.post(requestURL + "/campsite/register", siteInfos).then((res) => {
-            console.log(res.data);
-        })
+    const handleFileUpload = (event) => {
+        console.log(`${event.target.files[0].name} uploaded`);
+        setSiteInfos({...siteInfos, campGroundImages: JSON.stringify([event.target.files[0]?.name])});
+    };
+
+    async function registSite() {
+        await axios.post(requestURL + "/campsite/register", siteInfos, {})
         navigate('/showSiteList/' + info.hostNo + '/' + info.campGroundNo)
     }
 
@@ -27,6 +30,7 @@ export default function RegistSite() {
     }
 
     return <div>
+        <input type="file" accept={'image/*'} onChange={handleFileUpload}></input>
         <label><input type="text" onChange={(e) => {
             setSiteInfo("siteNo", parseInt(e.target.value))
         }}/>사이트 번호 <br/> </label>

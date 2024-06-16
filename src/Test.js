@@ -19,9 +19,8 @@ const Test = () => {
                     'Content-Type': 'multipart/form-data'
                 }
             });
-            uploadedFilePath = response.data;
-            await setImageURL("response");
-            console.log('Response:', uploadedFilePath);
+            console.log(response.data);
+            setImageURL("../uploads" + response.data);
         } catch (error) {
             console.error('Error uploading file:', error);
         }
@@ -32,6 +31,7 @@ const Test = () => {
     return (
         <div>
             <input type="file" onChange={handleFileUpload} />
+            <img src="/uploads/1718519010452-321.png" alt="Uploaded" />
         </div>
 
     );

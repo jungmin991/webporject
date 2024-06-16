@@ -25,7 +25,7 @@ function App() {
             facilitiesInfoNo: -1,
             mannerStartTime: null,
             mannerEndTime: null,
-            campGroundImages: JSON.stringify(["1", "2"]),
+            campGroundImages: "",
             name: "",
             location: "",
             type: null,
@@ -38,7 +38,6 @@ function App() {
 
     return (
         <div className='App'>
-            <Test></Test>
             <Routes>
                 <Route path='/' element={<Login/>}></Route>
                 <Route path='/Main' element={<Main/>}/>
