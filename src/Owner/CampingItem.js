@@ -12,7 +12,7 @@ export default function CampingItem({camping}) {
     }
 
     const updateCamping = () => {
-        navigate('/updateCamping/' + camping.campGroundNo);
+        navigate('/updateCamping/'+camping.userNo+'/'+ camping.campGroundNo);
     }
 
     return (

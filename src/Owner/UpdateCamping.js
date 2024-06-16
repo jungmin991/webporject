@@ -1,11 +1,14 @@
 import { useState } from "react"
 import  axios  from 'axios';
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { requestURL } from "../config/config";
 
 export default function UpdateCamping() {
 
     const groundNo = useParams();
+
+    const navigate = useNavigate();
+    console.log(groundNo)
 
     const [campGroundInfo, setCampGroundInfo] = useState({  
         campGroundNo : groundNo.campGroundNo,
@@ -49,12 +52,14 @@ export default function UpdateCamping() {
             const response4 = await axios.post(requestURL + '/campground/updateSurround', surround)
             console.log(response4.data)
 
+            console.log('Update successful');
+            navigate('/host/'+groundNo.userNo)
+
         }
         catch (error) {
             console.error('Error uploading file:', error);
             
         }
-
 
     }
 

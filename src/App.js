@@ -67,7 +67,7 @@ function App() {
                 <Route path='/showSiteItem' element={<CampingSiteItem/>}/>
                 <Route path='/detailAndReview/:id' element={<DetailAndReview userNo={userNo}/>}/>
                 <Route path='/ReservationSite/:campGroundSiteNo' element={<Reservation userNo={userNo}/>}/>
-                <Route path='/updateCamping/:campGroundNo' element={<UpdateCamping/>}/>
+                <Route path='/updateCamping/:userNo/:campGroundNo' element={<UpdateCamping/>}/>
             </Routes>
         </div>
     );
