@@ -54,15 +54,14 @@ export default function DetailAndReview({userNo}) {
         console.log(reviewData);
     }, []);
 
-
+    const [filterData, setFilterData] = useState([]);
     const onsubmit = (e) => {
         e.preventDefault();
         try {
             const searchData = {checkIn: checkIn, checkOut: checkOut, groundNo: groundNo};
             axios.post(requestURL + '/campground/getAvailableSites', searchData)
                 .then((response) => {
-                    console.log(response.data);
-                    setSiteData(response.data);
+                    setSiteData(response.data)
                 })
                 .catch((error) => {
                     console.error('Error fetching data:', error);
@@ -102,56 +101,65 @@ export default function DetailAndReview({userNo}) {
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn" onClick={onsubmit}>검색</button>
+                    <button type="submit" className="btn" onClick={() => {
+                        navigate('/MyReservationList/' + userNo)
+                    }}>뒤로 가기
+                    </button>
                 </div>
             </form>
-
-            {siteData.length > 0 ? siteData.map((site) => (
-                <div>
-                    {(site.enterDay === null || site.enterDay > checkOut || site.leaveDay < checkIn) ? <div>
-                        <div className="site-img">
-                            <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
+            {
+                siteData.length > 0 ?
+                    siteData.reduce((unique, site) => {
+                        return unique.some(item => item.siteNo === site.siteNo) ? unique : [...unique, site];
+                    }, []).map((site) => (
+                        <div>
+                            {(site.enterDay === null || site.enterDay > checkOut || site.leaveDay < checkIn) ? <div>
+                                <div className="site-img">
+                                    <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
+                                </div>
+                                <p>사이트 번호: {site.siteNo}</p>
+                                <p>사이트 이름: {site.siteName}</p>
+                                <p>인원수: {site.peopleNum}</p>
+                                <p>사이트 가격: {site.price}</p>
+                                <button onClick={() => {
+                                    setIsReservation(true);
+                                }}>예약
+                                </button>
+                                {isReservation ? <div>
+                                    <input type="text" placeholder="어른 수" onChange={
+                                        (e) => {
+                                            console.log(e.target.value);
+                                            setReservationSite({
+                                                ...reservationSite,
+                                                adult: e.target.value,
+                                                campGroundSiteNo: site.campGroundSiteNo
+                                            })
+                                        }
+                                    }></input>
+                                    <input type="text" placeholder="아이 수" onChange={
+                                        (e) => {
+                                            setReservationSite({...reservationSite, child: e.target.value})
+                                        }
+                                    }></input>
+                                    <button onClick={() => {
+                                        axios.post(requestURL + '/reservation/register', reservationSite)
+                                        navigate('/SearchCampGround/'+userNo)
+                                    }}>예약 등록</button>
+                                </div> : null}
+                            </div> : (site.state === 'WAIT' ? <div>
+                                <div className="site-img">
+                                    <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
+                                </div>
+                                <p>사이트 번호: {site.siteNo}</p>
+                                <p>사이트 이름: {site.siteName}</p>
+                                <p>인원수: {site.peopleNum}</p>
+                                <p>사이트 가격: {site.price}</p>
+                                <div>WAIT</div>
+                            </div> : null)
+                            }
                         </div>
-                        <p>사이트 번호: {site.siteNo}</p>
-                        <p>사이트 이름: {site.siteName}</p>
-                        <p>인원수: {site.peopleNum}</p>
-                        <p>사이트 가격: {site.price}</p>
-                        <button onClick={() => {
-                            setIsReservation(true);
-                        }}>예약
-                        </button>
-                        {isReservation ? <div>
-                            <input type="text" placeholder="어른 수" onChange={
-                                (e) => {
-                                    console.log(e.target.value);
-                                    setReservationSite({
-                                        ...reservationSite,
-                                        adult: e.target.value,
-                                        campGroundSiteNo: site.campGroundSiteNo
-                                    })
-                                }
-                            }></input>
-                            <input type="text" placeholder="아이 수" onChange={
-                                (e) => {
-                                    setReservationSite({...reservationSite, child: e.target.value})
-                                }
-                            }></input>
-                            <button onClick={() => {
-                                axios.post(requestURL + '/reservation/register', reservationSite)
-                            }}></button>
-                        </div> : null}
-                    </div> : (site.state === 'WAIT' ? <div>
-                        <div className="site-img">
-                            <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
-                        </div>
-                        <p>사이트 번호: {site.siteNo}</p>
-                        <p>사이트 이름: {site.siteName}</p>
-                        <p>인원수: {site.peopleNum}</p>
-                        <p>사이트 가격: {site.price}</p>
-                        <div>WAIT</div>
-                    </div> : null)
-                    }
-                </div>
-            )) : null}
+                    )) : null
+            }
 
             <h2>캠핑장 상세정보 및 리뷰</h2>
             <div className="camping-list">
@@ -207,7 +215,7 @@ export default function DetailAndReview({userNo}) {
                             </div>
 
                             <div className="amenityItem">
-                            <p>주변 환경</p>
+                                <p>주변 환경</p>
                                 <p>{campData.mountain = 1 ? '산 ' : ''} {campData.river = 1 ? '강' : ''}</p>
                             </div>
                         </div>

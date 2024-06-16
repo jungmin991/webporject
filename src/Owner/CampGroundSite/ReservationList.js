@@ -39,16 +39,24 @@ export default function ReservationList() {
     }, []);
 
     return <div>
-        {reservationLists.filter(reservation => reservation.state !== 'END' && reservation.state !== 'CANCEL').map((reservation, index) => (
-            <div>
-                <span key={index}>{reservation.enterDay.substring(0, 10)} | </span>
-                <span>{reservation.leaveDay.substring(0, 10)} | </span>
-                <span>{reservation.peopleNum} | </span>
-                <span>{reservation.state}</span>
-                <button onClick={() => setFixed(reservation.reservationNo)}>확정</button>
-                <button onClick={() => setCancel(reservation.reservationNo)}>취소</button>
-            </div>
-        ))}
+        <table>
+            {reservationLists.filter(reservation => reservation.state !== 'END' && reservation.state !== 'CANCEL').map((reservation, index) => (
+                <tr>
+                    <td>{reservation.siteName}</td>
+                    <td>{reservation.enterDay.substring(0, 10)}</td>
+                    <td>{reservation.leaveDay.substring(0, 10)}</td>
+                    <td>{reservation.adult}</td>
+                    <td>{reservation.child} </td>
+                    <td>{reservation.state}</td>
+                    <td>
+                        {reservation.state === 'WAIT' ? <td>
+                            <button onClick={() => setFixed(reservation.reservationNo)}>확정</button>
+                            <button onClick={() => setCancel(reservation.reservationNo)}>취소</button>
+                        </td> : <td></td>}
+                    </td>
+                </tr>
+            ))}
+        </table>
     </div>
 
 }

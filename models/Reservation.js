@@ -25,7 +25,7 @@ const Reservation = {
     },
 
     list: (req, res) => {
-        const query = 'select reservationNo, enterDay, leaveDay, adult, child, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
+        const query = 'select siteName, reservationNo, enterDay, leaveDay, adult, child, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
         conn.query(query, (err, result) => {
             if (err) {
                 console.log(err);

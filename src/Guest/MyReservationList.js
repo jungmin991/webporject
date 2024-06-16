@@ -35,7 +35,7 @@ export default function MyReservationList({userNo, setUserNo}) {
                 <span> {reservation.name}</span>
                 <span> {reservation.siteName}</span>
                 <span> {reservation.state}
-                    {reservation.state === 'FIXED' ?
+                    {reservation.state === 'END' ?
                         <button
                             onClick={() => review(reservation.campGroundNo)}>review</button> : reservation.state === 'WAIT' ?
                             <button onClick={() => {
