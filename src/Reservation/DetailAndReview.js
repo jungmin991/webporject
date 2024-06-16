@@ -107,38 +107,49 @@ export default function DetailAndReview({userNo}) {
 
             {siteData.length > 0 ? siteData.map((site) => (
                 <div>
-                    {console.log(site)}
-                    <div className="site-img">
-                        <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
-                    </div>
-                    <p>사이트 번호: {site.siteNo}</p>
-                    <p>사이트 이름: {site.siteName}</p>
-                    <p>인원수: {site.peopleNum}</p>
-                    <p>사이트 가격: {site.price}</p>
-                    <button onClick={() => {
-                        setIsReservation(true);
-                    }}>예약
-                    </button>
-                    {isReservation ? <div>
-                        <input type="text" placeholder="어른 수" onChange={
-                            (e) => {
-                                console.log(e.target.value);
-                                setReservationSite({
-                                    ...reservationSite,
-                                    adult: e.target.value,
-                                    campGroundSiteNo: site.campGroundSiteNo
-                                })
-                            }
-                        }></input>
-                        <input type="text" placeholder="아이 수" onChange={
-                            (e) => {
-                                setReservationSite({...reservationSite, child: e.target.value})
-                            }
-                        }></input>
+                    {(site.enterDay > checkOut || site.leaveDay < checkIn) ? <div>
+                        <div className="site-img">
+                            <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
+                        </div>
+                        <p>사이트 번호: {site.siteNo}</p>
+                        <p>사이트 이름: {site.siteName}</p>
+                        <p>인원수: {site.peopleNum}</p>
+                        <p>사이트 가격: {site.price}</p>
                         <button onClick={() => {
-                            axios.post(requestURL + '/reservation/register', reservationSite)
-                        }}></button>
-                    </div> : null}
+                            setIsReservation(true);
+                        }}>예약
+                        </button>
+                        {isReservation ? <div>
+                            <input type="text" placeholder="어른 수" onChange={
+                                (e) => {
+                                    console.log(e.target.value);
+                                    setReservationSite({
+                                        ...reservationSite,
+                                        adult: e.target.value,
+                                        campGroundSiteNo: site.campGroundSiteNo
+                                    })
+                                }
+                            }></input>
+                            <input type="text" placeholder="아이 수" onChange={
+                                (e) => {
+                                    setReservationSite({...reservationSite, child: e.target.value})
+                                }
+                            }></input>
+                            <button onClick={() => {
+                                axios.post(requestURL + '/reservation/register', reservationSite)
+                            }}></button>
+                        </div> : null}
+                    </div> : (site.state === 'WAIT' ? <div>
+                        <div className="site-img">
+                            <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
+                        </div>
+                        <p>사이트 번호: {site.siteNo}</p>
+                        <p>사이트 이름: {site.siteName}</p>
+                        <p>인원수: {site.peopleNum}</p>
+                        <p>사이트 가격: {site.price}</p>
+                        <div>WAIT</div>
+                    </div> : null)
+                    }
                 </div>
             )) : null}
 
@@ -196,7 +207,7 @@ export default function DetailAndReview({userNo}) {
                             </div>
 
                             <div className="amenityItem">
-                                <p>주변 환경</p>
+                            <p>주변 환경</p>
                                 <p>{campData.mountain = 1 ? '산 ' : ''} {campData.river = 1 ? '강' : ''}</p>
                             </div>
                         </div>
@@ -206,7 +217,7 @@ export default function DetailAndReview({userNo}) {
                     <h3>리뷰</h3>
                     <div className="review-item">
                         <div className="review-img">
-                            <img src={"/uploads/"+reviewData.reviewImage}></img>
+                            <img src={"/uploads/" + reviewData.reviewImage}></img>
                         </div>
                         <div className="review-content">
                             <p>리뷰 내용</p>

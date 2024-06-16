@@ -68,12 +68,10 @@ const Camp = {
 
     // campgroundNo를 통해 캠핑장 정보와 캠핑장 세부 정보를 조회
     campGroundListByNo: (req, res) => {
-        console.log(req.body.id)
         conn.query("SELECT campground.*, facilities.* ,facilitiesInfo.*, play.*, surround.* FROM campground LEFT JOIN facilitiesInfo ON campground.facilitiesInfoNo = facilitiesInfo.facilitiesInfoNo LEFT JOIN play ON facilitiesInfo.playNo = play.playNo LEFT JOIN surround ON facilitiesInfo.surroundNo = surround.surroundNo LEFT JOIN facilities ON facilitiesInfo.facilitiesNo = facilities.facilitiesNo WHERE campground.campgroundNo = ?", [req.body.id], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
-                console.log(result[0])
                 res.send(result)
             }
         })
@@ -92,7 +90,6 @@ const Camp = {
 
     // 게스트가 자신의 캠핑장 정보 조회 → 리뷰 작성
     mySiteList: (req, res) => {
-        console.log(req.body.guestNo);
         const query =
             'select reservationNo, name, siteName, state, campground.campGroundNo ' +
             'from campground ' +
@@ -100,7 +97,6 @@ const Camp = {
             'join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo ' +
             'where guestNo like ' + req.body.guestNo;
         conn.query(query, (err, result) => {
-            console.log(result);
             res.send(result);
         })
     },
@@ -186,7 +182,6 @@ const Camp = {
 
         Promise.all([facilitiesQuery, playQuery, surroundQuery])
             .then(() => {
-                console.log(maxFacilities);
                 res.send(maxFacilities);
             })
             .catch((err) => {
@@ -232,13 +227,27 @@ const Camp = {
 
     // 예약이 되지 않은 캠핑장 사이트 조회
     getAvailableSites: (req, res) => {
-        const query = "select campground.campGroundNo, campgroundsite.* from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo left join reservation on campground.campGroundNo = reservation.campGroundNo and campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where campgroundsite.campGroundSiteNo not in (select campGroundSiteNo from reservation where reservation.state != 'CANCEL' and (enterDay < ? and leaveDay > ?)) and campground.campgroundNo = ?;";
+        /*const query = "select campground.campGroundNo, campgroundsite.* from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo left join reservation on campground.campGroundNo = reservation.campGroundNo and campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where campgroundsite.campGroundSiteNo not in (select campGroundSiteNo from reservation where reservation.state != 'CANCEL' and (enterDay < ? and leaveDay > ?)) and campground.campgroundNo = ?;";
         conn.query(query, [req.body.checkIn, req.body.checkOut, req.body.groundNo.id], (err, result) => {
             if (err) {
                 console.error(err);
             } else {
                 console.log(result);
                 res.send(result);
+            }
+        });
+        */
+
+        console.log(req.body.groundNo.id);
+        const query = "select reservation.state, campground.campGroundNo, reservation.enterDay, reservation.leaveDay, campGroundSite.* from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo left join reservation on campground.campGroundNo = reservation.campGroundNo and campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where campgroundsite.campGroundSiteNo not in (select campGroundSiteNo from reservation where reservation.state = 'FIXED') and campground.campgroundNo = ?;";
+        const campGroundNo = req.body.groundNo.id;
+        console.log(campGroundNo);
+        conn.query(query, [campGroundNo], (err, result) => {
+            if (err) {
+                console.error(err);
+            } else {
+                console.log("dfdfdfdf       "+ JSON.stringify(result));
+                res.send(JSON.stringify(result));
             }
         });
     },
