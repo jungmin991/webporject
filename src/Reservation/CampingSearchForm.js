@@ -17,19 +17,9 @@ const Search = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let searchName = name;
-        let searchLocal = local;
-        let searchType = type;
-
-        if (searchName === '') {
-            searchName = '%';
-        }
-        if (searchLocal === '') {
-            searchLocal = '%';
-        }
-        if (searchType === 'all') {
-            searchType = '%';
-        }
+        let searchName = '%' + name + '%';
+        let searchLocal = '%' + local + '%';
+        let searchType = '%' + type + '%';
 
 
         const searchData = {name: searchName, type: searchType, local: searchLocal};
