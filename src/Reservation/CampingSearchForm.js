@@ -21,6 +21,11 @@ const Search = () => {
         let searchLocal = '%' + local + '%';
         let searchType = '%' + type + '%';
 
+        if(type === 'all')
+        {
+            setType('%')
+        }
+
 
         const searchData = {name: searchName, type: searchType, local: searchLocal};
         try {
