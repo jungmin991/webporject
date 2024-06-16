@@ -2,11 +2,12 @@ const conn = require('../db');
 
 const Reservation = {
     register: (req, res) => {
-        const {campGroundSiteNo, enterDay, leaveDay, guestNo, peopleNum} = req.body.reservationSite;
+        console.log(req.body);
+        const {campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child} = req.body;
         const query =
-            'insert reservation (campGroundSiteNo, enterDay, leaveDay, guestNo, peopleNum, state)' +
-            ' values (?, ?, ?, ?, ?, \'WAIT\')';
-        conn.query(query, [campGroundSiteNo, enterDay, leaveDay, guestNo, peopleNum], (err, result) => {
+            'insert reservation (campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child, state)' +
+            ' values (?, ?, ?, ?, ?, ?, \'WAIT\')';
+        conn.query(query, [campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child], (err, result) => {
             res.send(true);
         })
     },
@@ -24,7 +25,7 @@ const Reservation = {
     },
 
     list: (req, res) => {
-        const query = 'select reservationNo, enterDay, leaveDay, reservation.peopleNum, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
+        const query = 'select reservationNo, enterDay, leaveDay, adult, child, state from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where userNo like ' + req.body.hostNo;
         conn.query(query, (err, result) => {
             if (err) {
                 console.log(err);

@@ -16,8 +16,8 @@ import MyReservationList from "./Guest/MyReservationList";
 import Review from "./Guest/Review";
 import CampingSiteList from './Owner/CampingSiteList';
 import CampingSiteItem from './Owner/CampingSiteItem';
-import Test from "./Test";
 import DetailAndReview from './Reservation/DetailAndReview';
+import Reservation from "./Reservation/Reservation";
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -36,6 +36,7 @@ function App() {
         }
     );
 
+    const [userNo, setUserNo] = useState(0);
     return (
         <div className='App'>
             <Routes>
@@ -53,14 +54,18 @@ function App() {
                 <Route path='/RegistSite/:hostNo/:campGroundNo' element={<RegistSite/>}/>
                 <Route path='/SiteList/:campGroundNo' element={<SiteList/>}/>
                 <Route path='/ReservationList/:hostNo' element={<ReservationList/>}/>
-                <Route path='/MyReservationList/:guestNo' element={<MyReservationList/>}/>
+                <Route path='/MyReservationList/:guestNo' element={<MyReservationList userNo={userNo} setUserNo={setUserNo}/>}/>
                 <Route path='/Review/:guestNo/:campGroundNo' element={<Review/>}/>
-                <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>
-                <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
-                <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo} setCampGroundInfo={setCampGroundInfo} />}/>;
+                <Route path='/RegistCampGround1/:id' element={<RegistCampGroundInfo campGroundInfo={campGroundInfo}
+                                                                                    setCampGroundInfo={setCampGroundInfo}/>}/>
+                <Route path='/RegistCampGround2' element={<RegistFacilities campGroundInfo={campGroundInfo}
+                                                                            setCampGroundInfo={setCampGroundInfo}/>}/>;
+                <Route path='/RegistCampGround3' element={<RegistCampGround3 campGroundInfo={campGroundInfo}
+                                                                             setCampGroundInfo={setCampGroundInfo}/>}/>;
                 <Route path='/showSiteList/:id/:groundNum' element={<CampingSiteList/>}/>
                 <Route path='/showSiteItem' element={<CampingSiteItem/>}/>
-                <Route path='/detailAndReview/:id' element={<DetailAndReview/>}/>
+                <Route path='/detailAndReview/:id' element={<DetailAndReview userNo={userNo}/>}/>
+                <Route path='/ReservationSite/:campGroundSiteNo' element={<Reservation userNo={userNo}/>}/>
             </Routes>
         </div>
     );

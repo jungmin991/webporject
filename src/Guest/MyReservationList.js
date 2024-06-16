@@ -4,11 +4,10 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import './css/MyReservationList.css'
 
-export default function MyReservationList() {
+export default function MyReservationList({userNo,setUserNo}) {
     const guestNo = useParams()
     const [myReservationList, setMyReservationList] = useState([])
     const navigate = useNavigate();
-
     function getReservationList() {
         axios.post(requestURL + '/campground/mySiteList', guestNo).then((response) => {
             setMyReservationList(response.data);
@@ -17,6 +16,7 @@ export default function MyReservationList() {
     }
 
     function review(campGroundNo) {
+        setUserNo(guestNo.guestNo);
         navigate('/Review/' + guestNo.guestNo + "/" + campGroundNo);
     }
 

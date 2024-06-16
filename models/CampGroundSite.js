@@ -23,7 +23,6 @@ const CampGroundSite = {
             if (err) {
                 console.log(err);
             } else {
-                console.log(result[0])
                 res.send(result)
             }
         })

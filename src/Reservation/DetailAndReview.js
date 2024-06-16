@@ -1,20 +1,30 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { requestURL } from "../config/config";
+import {useEffect, useState} from "react";
+import {useNavigate, useParams} from "react-router-dom";
+import {requestURL} from "../config/config";
 import axios from "axios";
 import './css/DetailAndReview.css'
 
-export default function DetailAndReview() {
-
+export default function DetailAndReview({userNo}) {
+    const [isReservation, setIsReservation] = useState(false);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
+    const [reservationSite, setReservationSite] = useState({
+        campGroundSiteNo: 0,
+        guestNo: userNo,
+        enterDay: null,
+        leaveDay: null,
+        adult: 0,
+        child: 0
+    })
     const [campData, setCampData] = useState({});
     const [reviewData, setReviewData] = useState({});
     const [siteData, setSiteData] = useState([]);
 
     const groundNo = useParams();
+    const navigate = useNavigate();
 
     function getReviewData() {
+        console.log(userNo);
         axios.post(requestURL + '/review/show', groundNo)
             .then((response) => {
                 setReviewData(response.data);
@@ -68,7 +78,10 @@ export default function DetailAndReview() {
                     <input
                         type="date"
                         value={checkIn}
-                        onChange={(e) => setCheckIn(e.target.value)}
+                        onChange={(e) => (setCheckIn(e.target.value), ({
+                            ...reservationSite,
+                            enterDay: e.target.value
+                        }))}
                         placeholder="입실일"
                         className="form-control"
                     />
@@ -77,7 +90,10 @@ export default function DetailAndReview() {
                     <input
                         type="date"
                         value={checkOut}
-                        onChange={(e) => setCheckOut(e.target.value)}
+                        onChange={(e) => (setCheckOut(e.target.value), setReservationSite({
+                            ...reservationSite,
+                            leaveDay: e.target.value
+                        }))}
                         placeholder="퇴실일"
                         className="form-control"
                     />
@@ -87,24 +103,45 @@ export default function DetailAndReview() {
                 </div>
             </form>
 
-            {siteData.map((site) => (
+            {siteData.length > 0 ? siteData.map((site) => (
                 <div>
+                    {console.log(site)}
                     <div className="site-img">
-                        <img src = {site.campGroundImages} alt="사이트 이미지"/>
+                        <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
                     </div>
                     <p>사이트 번호: {site.siteNo}</p>
                     <p>사이트 이름: {site.siteName}</p>
                     <p>인원수: {site.peopleNum}</p>
                     <p>사이트 가격: {site.price}</p>
+                    <button onClick={() => {
+                        setIsReservation(true);
+                    }}>예약
+                    </button>
+                    {isReservation ? <div>
+                        <input type="text" placeholder="어른 수" onChange={
+                            (e) => {
+                                setReservationSite({...reservationSite, adult: e.target.value})
+                                setReservationSite({...reservationSite, campGroundSiteNo: site.campGroundSiteNo})
+
+                            }
+                        }></input>
+                        <input type="text" placeholder="아이 수" onChange={
+                            (e) => {
+                                setReservationSite({...reservationSite, child: e.target.value})
+                            }
+                        }></input>
+                        <button onClick={() => {
+                            axios.post(requestURL + '/reservation/register', reservationSite)
+                        }}></button>
+                    </div> : null}
                 </div>
-            ))
-            }
+            )) : null}
 
             <h2>캠핑장 상세정보 및 리뷰</h2>
             <div className="camping-list">
                 <div className="camping-item">
                     <div className="camping-image">
-                        <img src = {campData.campGroundImage} alt="캠핑장 이미지"/>
+                        <img src={"/uploads/" + campData?.campGroundImages} alt="캠핑장 이미지"/>
                     </div>
                     <div className="camping-info">
                         <div className="campingItem">
