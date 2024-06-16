@@ -14,5 +14,10 @@ router.post('/campground/getAvailableSites', controller.getAvailableSites);
 
 router.post('/campground/getTest', controller.getTest);
 
+router.post('/campground/updateCamp', controller.updateCamp);
+router.post('/campground/updateFacilities', controller.updateFacilities);
+router.post('/campground/updatePlay', controller.updatePlay);
+router.post('/campground/updateSurround', controller.updateSurround);
+
 module.exports = router;
 

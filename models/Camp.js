@@ -57,7 +57,7 @@ const Camp = {
         })
     },
     getTest: (req, res) => {
-        conn.query("SELECT * FROM campground WHERE name LIKE ? AND type LIKE ? AND location LIKE ?", [req.body.name, req.body.type, req.body.local], (err, result) => {
+        conn.query("SELECT * FROM campground WHERE name LIKE %?% AND type LIKE ? AND location LIKE ?", [req.body.name, req.body.type, req.body.local], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
@@ -241,7 +241,70 @@ const Camp = {
                 res.send(result);
             }
         });
-    }
+    },
+
+    updateCamp: (req, res) => {
+        conn.query("UPDATE campground\n" +
+            "SET\n" +
+            "    userNo = ?,\n" +
+            "    mannerStartTime = ?,\n" +
+            "    mannerEndTime = ?,\n" +
+            "    name = ?,\n" +
+            "    location = ?,\n" +
+            "    type = ?,\n" +
+            "    callNum = ?,\n" +
+            "    campingInfo = ?,\n" +
+            "    enterTime = ?,\n" +
+            "    leaveTime = ?\n" +
+            "WHERE campGroundNo = ?;", [req.body.userNo, req.body.mannerStartTime, req.body.mannerEndTime, req.body.name, req.body.location, req.body.type, req.body.callNum, req.body.campingInfo , req.body.enterTime, req.body.leaveTime, req.body.campGroundNo], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        })
+    },
+    updateFacilities: (req, res) => {
+        conn.query("UPDATE facilities\n" +
+            "SET\n" +
+            "   mart = ?,\n" +
+            "   toillet = ?\n" +
+            "WHERE facilitiesNo = ?;", [req.body.mart, req.body.toillet, req.body.facilitiesNo], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        })
+    },
+    updatePlay: (req, res) => {
+        conn.query("UPDATE play\n" +
+            "SET \n" +
+            "   playGround = ?,\n" +
+            "   singingRoom = ?\n" +
+            "WHERE playNo = ?;", [req.body.playGround, req.body.singingRoom, req.body.playNo], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        })
+    },
+    updateSurround: (req, res) => {
+        conn.query("UPDATE surround\n" +
+            "SET\n" +
+            "   river = ?,\n" +
+            "   mountain = ?\n" +
+            "WHERE surroundNo = ?;", [req.body.river, req.body.mountain, req.body.surroundNo], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                res.send(result)
+            }
+        })
+    },
 }
+
+
 
 module.exports = Camp;

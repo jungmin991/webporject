@@ -42,3 +42,19 @@ exports.campGroundListByNo = (req, res) => {
 exports.getAvailableSites = (req, res) => {
     camp.getAvailableSites(req, res);
 }
+
+exports.updateCamp = (req, res) => {
+    camp.updateCamp(req, res);
+}
+
+exports.updateFacilities = (req, res) => {
+    camp.updateFacilities(req, res);
+}
+
+exports.updatePlay = (req, res) => {
+    camp.updatePlay(req, res);
+}
+
+exports.updateSurround = (req, res) => {
+    camp.updateSurround(req, res);
+}
