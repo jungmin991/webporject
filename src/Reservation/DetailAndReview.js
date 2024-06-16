@@ -10,6 +10,7 @@ export default function DetailAndReview() {
     const [checkOut, setCheckOut] = useState('');
     const [campData, setCampData] = useState({});
     const [reviewData, setReviewData] = useState({});
+    const [siteData, setSiteData] = useState([]);
 
     const groundNo = useParams();
 
@@ -84,6 +85,19 @@ export default function DetailAndReview() {
                     <button type="submit" className="btn">검색</button>
                 </div>
             </form>
+
+            {siteData.map((site) => (
+                <div>
+                    <div className="site-img">
+                        <img src = {site.campGroundImages} alt="사이트 이미지"/>
+                    </div>
+                    <p>사이트 번호: {site.siteNo}</p>
+                    <p>사이트 이름: {site.siteName}</p>
+                    <p>인원수: {site.peopleNum}</p>
+                    <p>사이트 가격: {site.price}</p>
+                </div>
+            ))
+            }
 
             <h2>캠핑장 상세정보 및 리뷰</h2>
             <div className="camping-list">
