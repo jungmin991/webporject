@@ -6,20 +6,25 @@ export default function CampingItem({camping}) {
 
     const navigate = useNavigate();
 
-    const onclick = async() => {
+    const onclick = () => {
         console.log(camping.campGroundImages[0])
         navigate('/showSiteList/' + camping.userNo + '/' + camping.campGroundNo);
     }
 
+    const updateCamping = () => {
+        navigate('/updateCamping/' + camping.campGroundNo);
+    }
+
     return (
-        <div className="camping-item" onClick={onclick}>
-            <div className="camping-item-img">
+        <div className="camping-item" >
+            <div className="camping-item-img" onClick={onclick}>
                 <img src={"/uploads/"+camping.campGroundImages[0]} alt="camping-img" />
             </div>
             <div className="camping-item-info">
                 <div className="camping-item-title">{camping.name}</div>
                 <div className="camping-item-location">{camping.location}</div>
             </div>
+            <button onClick={updateCamping}>수정하기</button>
         </div>
     );
 }

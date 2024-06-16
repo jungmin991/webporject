@@ -18,6 +18,7 @@ import CampingSiteList from './Owner/CampingSiteList';
 import CampingSiteItem from './Owner/CampingSiteItem';
 import DetailAndReview from './Reservation/DetailAndReview';
 import Reservation from "./Reservation/Reservation";
+import UpdateCamping from './Owner/UpdateCamping';
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -66,6 +67,7 @@ function App() {
                 <Route path='/showSiteItem' element={<CampingSiteItem/>}/>
                 <Route path='/detailAndReview/:id' element={<DetailAndReview userNo={userNo}/>}/>
                 <Route path='/ReservationSite/:campGroundSiteNo' element={<Reservation userNo={userNo}/>}/>
+                <Route path='/updateCamping/:campGroundNo' element={<UpdateCamping/>}/>
             </Routes>
         </div>
     );
