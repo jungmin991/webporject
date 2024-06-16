@@ -233,7 +233,7 @@ const Camp = {
     // 예약이 되지 않은 캠핑장 사이트 조회
     getAvailableSites: (req, res) => {
         const query = "select campground.campGroundNo, campgroundsite.campGroundSiteNo, campgroundsite.siteNo from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo left join reservation on campground.campGroundNo = reservation.campGroundNo and campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where campgroundsite.campGroundSiteNo not in (select campGroundSiteNo from reservation where reservation.state != 'CANCEL' and (enterDay < ? and leaveDay > ?)) and campground.campgroundNo = ? group by campground.campGroundNo, campgroundsite.campGroundSiteNo, campgroundsite.siteNo;";
-        conn.query(query,[req.body.checkIn, req.body.checkOut, req.body.groundNo], (err, result) => {
+        conn.query(query,[req.body.checkIn, req.body.checkOut, req.body.groundNo.id], (err, result) => {
             if (err) {
                 console.error(err);
             } else {

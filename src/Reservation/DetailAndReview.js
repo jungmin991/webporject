@@ -50,6 +50,7 @@ export default function DetailAndReview() {
             axios.post(requestURL + '/campground/getAvailableSites', searchData)
                 .then((response) => {
                     console.log(response.data);
+                    setSiteData(response.data);
                 })
                 .catch((error) => {
                     console.error('Error fetching data:', error);
@@ -62,7 +63,7 @@ export default function DetailAndReview() {
 
     return (
         <div>
-            <form onSubmit={onsubmit}>
+            <form>
                 <div className="form-group">
                     <input
                         type="date"
@@ -82,7 +83,7 @@ export default function DetailAndReview() {
                     />
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn">검색</button>
+                    <button type="submit" className="btn" onClick={onsubmit}>검색</button>
                 </div>
             </form>
 
