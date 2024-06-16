@@ -4,21 +4,24 @@
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-.RegistCampFormDiv input,
 .RegistCampFormDiv label{
     display: block;
-    margin-bottom: 10px;
     font-size: 16px;
     color: #333;
     max-width: 700px;
-    margin: 0 auto 10px auto;
+    max-height: 40px;
+    margin: 0 auto 40px auto;
 }
 
 .RegistCampFormDiv input {
     padding: 8px 12px;
-    border: 1px solid #ccc;
     border-radius: 4px;
+    width: 90%;
+}
+.RegistCampFormDiv #campingInfoInput{
     width: 100%;
+    height: 20px;
+    left: 0;
 }
 
 .parent {
@@ -27,7 +30,7 @@
 
 .linkName {
     position: absolute;
-    top: 145%;
+    top: 140%;
     left: 50%;
     transform: translate(-50%, -50%);
     display: inline-block;

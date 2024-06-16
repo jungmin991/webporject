@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { requestURL } from "../config/config";
 import axios from "axios";
+import './css/DetailAndReview.css'
 
 export default function DetailAndReview() {
 
