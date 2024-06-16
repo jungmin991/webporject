@@ -62,7 +62,7 @@ export default function DetailAndReview() {
 
     return (
         <div>
-            <form onSubmit={onsubmit}>
+            <form className="DARform" onSubmit={onsubmit}>
                 <div className="form-group">
                     <input
                         type="date"
@@ -106,27 +106,57 @@ export default function DetailAndReview() {
                         <img src = {campData.campGroundImage} alt="캠핑장 이미지"/>
                     </div>
                     <div className="camping-info">
-                        <h3>캠핑장 이름</h3>
-                        <h3>{campData.name}</h3>
-                        <p>캠핑장 설명</p>
-                        <p>{campData.campInfo}</p>
-                        <p>캠핑장 위치</p>
-                        <p>{campData.location}</p>
-                        <p>캠핑장 유형</p>
-                        <p>{campData.type}</p>
-                        <p>입실 시간, 퇴실 시간</p>
-                        <p>{campData.enterTime} ~ {campData.leaveTime}</p>
-                        <p>매너타임</p>
-                        <p>{campData.mannerStartTime}~{campData.mannerEndTime}</p>
-                        <p>캠핑장 전화번호</p>
-                        <p>{campData.callNum}</p>
-                        <p>편의시설</p>
-                        <p>{campData.mart = 1 ? '마트 ' : ''} {campData.toilet = 1 ? '화장실' : ''}</p> 
-                        <p>놀이시설</p>
-                        <p>{campData.playGround = 1 ? '놀이터 ' : ''} {campData.singingRoom = 1 ? '노래방' : ''}</p>
-                        <p>주변 환경</p>
-                        <p>{campData.mountain = 1 ? '산 ' : ''} {campData.river = 1 ? '강' : ''}</p>
+                        <div className="campingItem">
+                            <h3>캠핑장 이름</h3>
+                            <h3>{campData.name}</h3>
+                        </div>
 
+                        <div className="campingItem">
+                            <p>캠핑장 설명</p>
+                            <p>{campData.campInfo}</p>
+                        </div>
+
+                        <div className="campingItem">
+                            <p>캠핑장 위치</p>
+                            <p>{campData.location}</p>
+                        </div>
+
+                        <div className="campingItem">
+                            <p>캠핑장 유형</p>
+                            <p>{campData.type}</p>
+                        </div>
+
+                        <div className="campingItem">
+                            <p>입실 시간, 퇴실 시간</p>
+                            <p>{campData.enterTime} ~ {campData.leaveTime}</p>
+                        </div>
+
+                        <div className="campingItem">
+                            <p>매너타임</p>
+                            <p>{campData.mannerStartTime}~{campData.mannerEndTime}</p>
+                        </div>
+
+                        <div className="campingItem">
+                            <p>캠핑장 전화번호</p>
+                            <p>{campData.callNum}</p>
+                        </div>
+
+                        <div className="amenity">
+                            <div className="amenityItem">
+                                <p>편의시설</p>
+                                <p>{campData.mart = 1 ? '마트 ' : ''} {campData.toilet = 1 ? '화장실' : ''}</p>
+                            </div>
+
+                            <div className="amenityItem">
+                                <p>놀이시설</p>
+                                <p>{campData.playGround = 1 ? '놀이터 ' : ''} {campData.singingRoom = 1 ? '노래방' : ''}</p>
+                            </div>
+
+                            <div className="amenityItem">
+                                <p>주변 환경</p>
+                                <p>{campData.mountain = 1 ? '산 ' : ''} {campData.river = 1 ? '강' : ''}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="camping-review">
