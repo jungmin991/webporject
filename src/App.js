@@ -16,6 +16,7 @@ import MyReservationList from "./Guest/MyReservationList";
 import Review from "./Guest/Review";
 import CampingSiteList from './Owner/CampingSiteList';
 import CampingSiteItem from './Owner/CampingSiteItem';
+import Test from "./Test";
 
 function App() {
     const [campGroundInfo, setCampGroundInfo] = useState({
@@ -36,6 +37,7 @@ function App() {
 
     return (
         <div className='App'>
+            <Test></Test>
             <Routes>
                 <Route path='/' element={<Login/>}></Route>
                 <Route path='/Main' element={<Main/>}/>

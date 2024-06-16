@@ -2,6 +2,7 @@ import axios from "axios";
 import {requestURL} from "../config/config";
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import './css/MyReservationList.css'
 
 export default function MyReservationList() {
     const guestNo = useParams()
@@ -23,12 +24,12 @@ export default function MyReservationList() {
         getReservationList();
     }, []);
 
-    return <div>
+    return <div className="baseReser">
         <button onClick={() => {
             navigate('/SearchCampGround/'+guestNo.guestNo);
         }}>검색</button>
         {myReservationList.map((reservation, index) => (
-            <div>
+            <div className="baseReser2">
                 <span> {reservation.name}</span>
                 <span> {reservation.siteName}</span>
                 <span> {reservation.state}
