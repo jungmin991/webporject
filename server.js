@@ -36,7 +36,7 @@ const login = require("./routes/login");
 const campGround = require("./routes/campGround");
 const campSite = require("./routes/campSite");
 const reservation = require("./routes/Reservation");
-const review = require("./routes/review");
+const review = require("./routes/Review");
 
 // Use routes
 app.use(login);

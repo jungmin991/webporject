@@ -9,6 +9,8 @@ router.post('/campground/insertFacilities', controller.insertFacilities);
 router.post('/campground/maxFacilities', controller.maxFacilities);
 router.post('/campground/registerFacilitiesInfo', controller.registerFacilitiesInfo);
 router.post('/campground/getMaxFacilitiesInfo', controller.getMaxFacilitiesInfo);
+router.post('/campground/campGroundListByNo', controller.campGroundListByNo);
+router.post('/campground/getAvailableSites', controller.getAvailableSites);
 
 router.post('/campground/getTest', controller.getTest);
 

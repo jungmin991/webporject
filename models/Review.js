@@ -11,6 +11,15 @@ const Review = {
             res.send(true);
         }))
     },
+
+    // 리뷰 조회(캠핑장별)
+    show: (req, res) => {
+        const {campGroundNo} = req.body;
+        const query = 'select * from review where campGroundNo = ?'
+        conn.query(query, [campGroundNo], (err, result) => {
+            res.send(result);
+        })
+    },
 }
 
 module.exports = Review;

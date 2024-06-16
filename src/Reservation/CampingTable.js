@@ -1,7 +1,15 @@
 // CampingTable.js
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const CampingTable = ({ camps }) => {
+
+    const navigate = useNavigate();
+
+    const onclick = () => {
+        navigate('/detailAndReview/'+camps.campGroundNo)
+    }
+
     return (
         <table>
             <thead>
@@ -13,7 +21,7 @@ const CampingTable = ({ camps }) => {
             </thead>
             <tbody>
                 {camps.map(camp => (
-                    <tr key={camp.index}>
+                    <tr key={camp.index} onClick={onclick}>
                     <td>{camp.name}</td>
                     <td>{camp.type}</td>
                     <td>{camp.location}</td>

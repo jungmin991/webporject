@@ -66,6 +66,19 @@ const Camp = {
         })
     },
 
+    // campgroundNo를 통해 캠핑장 정보와 캠핑장 세부 정보를 조회
+    campGroundListByNo: (req, res) => {
+        console.log(req.body.id)
+        conn.query("SELECT campground.*, facilities.* ,facilitiesInfo.*, play.*, surround.* FROM campground LEFT JOIN facilitiesInfo ON campground.facilitiesInfoNo = facilitiesInfo.facilitiesInfoNo LEFT JOIN play ON facilitiesInfo.playNo = play.playNo LEFT JOIN surround ON facilitiesInfo.surroundNo = surround.surroundNo WHERE campground.campgroundNo = ?", [req.body.id], (err, result) => {
+            if (err) {
+                console.log(err)
+            } else {
+                console.log(result[0])
+                res.send(result)
+            }
+        })
+    },
+
     // 캠핑장 리스트 조회 (UserNo로 조회)
     campGroundList: (req, res) => {
         conn.query("SELECT * FROM campground WHERE userNo = ?", [req.body.userNo], (err, result) => {
@@ -213,6 +226,18 @@ const Camp = {
                 const maxFacilitiesInfo = result[0].maxFacilitiesInfo;
                 console.log('Max facilities info:', maxFacilitiesInfo);
                 res.status(200).json({maxFacilitiesInfo}); // Send maxFacilitiesInfo as JSON response
+            }
+        });
+    },
+
+    // 예약이 되지 않은 캠핑장 사이트 조회
+    getAvailableSites: (req, res) => {
+        const query = "select campground.campGroundNo, campgroundsite.campGroundSiteNo, campgroundsite.siteNo from campground join campgroundsite on campground.campGroundNo = campgroundsite.campGroundNo left join reservation on campground.campGroundNo = reservation.campGroundNo and campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo where campgroundsite.campGroundSiteNo not in (select campGroundSiteNo from reservation where reservation.state != 'CANCEL' and (enterDay < ? and leaveDay > ?)) and campground.campgroundNo = ? group by campground.campGroundNo, campgroundsite.campGroundSiteNo, campgroundsite.siteNo;";
+        conn.query(query,[req.body.checkIn, req.body.checkOut, req.body.groundNo], (err, result) => {
+            if (err) {
+                console.error(err);
+            } else {
+                res.send(result);
             }
         });
     }

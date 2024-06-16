@@ -34,3 +34,11 @@ exports.registerFacilitiesInfo = (req, res) => {
 exports.getMaxFacilitiesInfo = (req, res) => {
     camp.getMaxFacilitiesInfo(req, res);
 }
+
+exports.campGroundListByNo = (req, res) => {
+    camp.campGroundListByNo(req, res);
+}
+
+exports.getAvailableSites = (req, res) => {
+    camp.getAvailableSites(req, res);
+}
