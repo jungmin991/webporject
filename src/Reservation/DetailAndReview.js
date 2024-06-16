@@ -23,7 +23,7 @@ export default function DetailAndReview() {
     }
 
     function getCampData() {
-        axios.post(requestURL + '/campground/reviewListByNo', groundNo)
+        axios.post(requestURL + '/campground/campGroundListByNo', groundNo)
             .then((response) => {
                 setCampData(response.data);
             })
