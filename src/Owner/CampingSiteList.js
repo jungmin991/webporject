@@ -12,7 +12,6 @@ export default function CampingSiteList() {
     const [data, setData] = useState([]);
 
     function sites() {
-        console.log(user)
         axios.post(requestURL + '/campsite/siteList', user)
             .then((response) => {
                 setData(response.data);

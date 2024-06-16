@@ -27,7 +27,7 @@ const Test = () => {
     return (
         <div>
             <input type="file" onChange={handleFileUpload} />
-            <img src="../uploads/1718513594847-321.png" alt="Uploaded" />
+            <img src="..\uploads\1718518031862-menu1_2.jpg" alt="Uploaded" />
         </div>
 
     );
