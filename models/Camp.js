@@ -255,7 +255,6 @@ const Camp = {
     updateCamp: (req, res) => {
         conn.query("UPDATE campground\n" +
             "SET\n" +
-            "    userNo = ?,\n" +
             "    mannerStartTime = ?,\n" +
             "    mannerEndTime = ?,\n" +
             "    name = ?,\n" +
@@ -265,7 +264,7 @@ const Camp = {
             "    campingInfo = ?,\n" +
             "    enterTime = ?,\n" +
             "    leaveTime = ?\n" +
-            "WHERE campGroundNo = ?;", [req.body.userNo, req.body.mannerStartTime, req.body.mannerEndTime, req.body.name, req.body.location, req.body.type, req.body.callNum, req.body.campingInfo , req.body.enterTime, req.body.leaveTime, req.body.campGroundNo], (err, result) => {
+            "WHERE campGroundNo = ?;", [req.body.mannerStartTime, req.body.mannerEndTime, req.body.name, req.body.location, req.body.type, req.body.callNum, req.body.campingInfo , req.body.enterTime, req.body.leaveTime, req.body.campGroundNo], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
@@ -277,8 +276,8 @@ const Camp = {
         conn.query("UPDATE facilities\n" +
             "SET\n" +
             "   mart = ?,\n" +
-            "   toillet = ?\n" +
-            "WHERE facilitiesNo = ?;", [req.body.mart, req.body.toillet, req.body.facilitiesNo], (err, result) => {
+            "   toilet = ?\n" +
+            "WHERE facilitiesNo = ?;", [req.body.mart, req.body.toilet, req.body.facilitiesNo], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
