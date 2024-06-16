@@ -107,7 +107,7 @@ export default function DetailAndReview({userNo}) {
 
             {siteData.length > 0 ? siteData.map((site) => (
                 <div>
-                    {(site.enterDay > checkOut || site.leaveDay < checkIn) ? <div>
+                    {(site.enterDay === null || site.enterDay > checkOut || site.leaveDay < checkIn) ? <div>
                         <div className="site-img">
                             <img src={'/uploads/' + site.campGroundImages} alt="사이트 이미지"/>
                         </div>
@@ -217,11 +217,11 @@ export default function DetailAndReview({userNo}) {
                     <h3>리뷰</h3>
                     <div className="review-item">
                         <div className="review-img">
-                            <img src={"/uploads/" + reviewData.reviewImage}></img>
+                            <img src={"/uploads/" + reviewData?.reviewImage}></img>
                         </div>
                         <div className="review-content">
                             <p>리뷰 내용</p>
-                            <p>{reviewData.review}</p>
+                            <p>{reviewData?.review}</p>
                         </div>
                     </div>
                 </div>
