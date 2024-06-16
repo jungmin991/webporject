@@ -55,18 +55,27 @@ const Search = () => {
                         placeholder="캠핑장 이름"
                     />
                 </div>
-                <div className="form-group">
+                <div>
+                    <input
+                        className="inputName"
+                        type="text"
+                        value={local}
+                        onChange={(e) => setLocal(e.target.value)}
+                        placeholder="지역 검색"
+                    />
+                </div>
+                {/*<div className="form-group">
                     <select type="text" value={local} onChange={(e) => setLocal(e.target.value)}
                             placeholder="지역" className="form-control">
-                    <option value="all">모두</option>
-                    <option value="gangwon">강원도</option>
-                    <option value="gyeongsang">경상도</option>
-                    <option value="gyeonggi">경기도</option>
-                    <option value="jeolla">전라도</option>
-                    <option value="chungcheong">충청도</option>
-                    <option value="jeju">제주도</option>
-                </select>
-                </div>
+                        <option value="all">모두</option>
+                        <option value="gangwon">강원도</option>
+                        <option value="gyeongsang">경상도</option>
+                        <option value="gyeonggi">경기도</option>
+                        <option value="jeolla">전라도</option>
+                        <option value="chungcheong">충청도</option>
+                        <option value="jeju">제주도</option>
+                    </select>
+                </div>*/}
                 <div className="form-group">
                     <select
                         value={type}
