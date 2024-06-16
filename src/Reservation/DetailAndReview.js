@@ -25,7 +25,8 @@ export default function DetailAndReview() {
     function getCampData() {
         axios.post(requestURL + '/campground/campGroundListByNo', groundNo)
             .then((response) => {
-                setCampData(response.data);
+                console.log(response.data);
+                setCampData(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);

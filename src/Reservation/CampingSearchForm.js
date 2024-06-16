@@ -5,12 +5,6 @@ import {requestURL} from "../config/config";
 import {useNavigate} from "react-router-dom";
 import CampingTable from './CampingTable';
 
-const Camp = {
-    name: '',
-    type: '',
-    location: ''
-}
-
 const Search = () => {
     const [name, setName] = useState('');
     const [local, setLocal] = useState('%');
@@ -19,7 +13,7 @@ const Search = () => {
     const [checkOut, setCheckOut] = useState('');
     const [isDetail, setIsDetail] = useState(false);
     const navigate = useNavigate();
-    const [camps, setCamps] = useState([Camp])
+    const [camps, setCamps] = useState([])
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -43,11 +37,11 @@ const Search = () => {
             console.log(searchData);
             const response = await axios.post(requestURL + '/campground/getTest', searchData);
             setCamps(response.data);
-            console.log(camps)
         } catch (err) {
             console.error('Error fetching search results:', err);
         }
     };
+
 
     return (
         <div className="CampingSearchForm">

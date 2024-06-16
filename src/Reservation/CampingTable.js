@@ -7,7 +7,8 @@ const CampingTable = ({ camps }) => {
     const navigate = useNavigate();
 
     const onclick = () => {
-        navigate('/detailAndReview/'+camps.campGroundNo)
+        console.log(camps)
+        navigate('/detailAndReview/'+camps[0].campGroundNo)
     }
 
     return (

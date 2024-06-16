@@ -69,7 +69,7 @@ const Camp = {
     // campgroundNo를 통해 캠핑장 정보와 캠핑장 세부 정보를 조회
     campGroundListByNo: (req, res) => {
         console.log(req.body.id)
-        conn.query("SELECT campground.*, facilities.* ,facilitiesInfo.*, play.*, surround.* FROM campground LEFT JOIN facilitiesInfo ON campground.facilitiesInfoNo = facilitiesInfo.facilitiesInfoNo LEFT JOIN play ON facilitiesInfo.playNo = play.playNo LEFT JOIN surround ON facilitiesInfo.surroundNo = surround.surroundNo WHERE campground.campgroundNo = ?", [req.body.id], (err, result) => {
+        conn.query("SELECT campground.*, facilities.* ,facilitiesInfo.*, play.*, surround.* FROM campground LEFT JOIN facilitiesInfo ON campground.facilitiesInfoNo = facilitiesInfo.facilitiesInfoNo LEFT JOIN play ON facilitiesInfo.playNo = play.playNo LEFT JOIN surround ON facilitiesInfo.surroundNo = surround.surroundNo LEFT JOIN facilities ON facilitiesInfo.facilitiesNo = facilities.facilitiesNo WHERE campground.campgroundNo = ?", [req.body.id], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
