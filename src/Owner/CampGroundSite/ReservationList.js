@@ -39,7 +39,7 @@ export default function ReservationList() {
     }, []);
 
     return <div>
-        {reservationLists.map((reservation, index) => (
+        {reservationLists.filter(reservation => reservation.state !== 'END' && reservation.state !== 'CANCEL').map((reservation, index) => (
             <div>
                 <span key={index}>{reservation.enterDay.substring(0, 10)} | </span>
                 <span>{reservation.leaveDay.substring(0, 10)} | </span>
