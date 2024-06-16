@@ -3,11 +3,11 @@ const conn = require('../db');
 const Reservation = {
     register: (req, res) => {
         console.log(req.body);
-        const {campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child} = req.body;
+        const {campGroundNo, campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child} = req.body;
         const query =
-            'insert reservation (campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child, state)' +
-            ' values (?, ?, ?, ?, ?, ?, \'WAIT\')';
-        conn.query(query, [campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child], (err, result) => {
+            'insert reservation (campGroundNo, campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child, state)' +
+            ' values (?, ?, ?, ?, ?, ?, ?, \'WAIT\')';
+        conn.query(query, [campGroundNo, campGroundSiteNo, enterDay, leaveDay, guestNo, adult, child], (err, result) => {
             res.send(true);
         })
     },
@@ -15,7 +15,7 @@ const Reservation = {
     // 예약 정보 수정
     modify: (req, res) => {
         console.log(req.body)
-        conn.query('UPDATE reservation SET state= \''+ req.body.state +'\' WHERE reservationNo LIKE ' + req.body.reservationNo, (err, result) => {
+        conn.query('UPDATE reservation SET state= \'' + req.body.state + '\' WHERE reservationNo LIKE ' + req.body.reservationNo, (err, result) => {
             if (err) {
                 console.log(err);
             } else {

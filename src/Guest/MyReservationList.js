@@ -4,10 +4,11 @@ import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import './css/MyReservationList.css'
 
-export default function MyReservationList({userNo,setUserNo}) {
+export default function MyReservationList({userNo, setUserNo}) {
     const guestNo = useParams()
     const [myReservationList, setMyReservationList] = useState([])
     const navigate = useNavigate();
+
     function getReservationList() {
         axios.post(requestURL + '/campground/mySiteList', guestNo).then((response) => {
             setMyReservationList(response.data);
@@ -16,7 +17,6 @@ export default function MyReservationList({userNo,setUserNo}) {
     }
 
     function review(campGroundNo) {
-        setUserNo(guestNo.guestNo);
         navigate('/Review/' + guestNo.guestNo + "/" + campGroundNo);
     }
 
@@ -26,15 +26,30 @@ export default function MyReservationList({userNo,setUserNo}) {
 
     return <div className="baseReser">
         <button onClick={() => {
-            navigate('/SearchCampGround/'+guestNo.guestNo);
-        }}>검색</button>
+            setUserNo(guestNo.guestNo);
+            navigate('/SearchCampGround/' + guestNo.guestNo);
+        }}>검색
+        </button>
         {myReservationList.map((reservation, index) => (
             <div className="baseReser2">
                 <span> {reservation.name}</span>
                 <span> {reservation.siteName}</span>
                 <span> {reservation.state}
                     {reservation.state === 'FIXED' ?
-                        <button onClick={() => review(reservation.campGroundNo)}>review</button> : null}
+                        <button
+                            onClick={() => review(reservation.campGroundNo)}>review</button> : reservation.state === 'WAIT' ?
+                            <button onClick={() => {
+                                const data = {
+                                    state: 'CANCEL',
+                                    reservationNo: reservation.reservationNo
+                                }
+                                console.log(reservation);
+                                axios.post(requestURL + "/reservation/modify", data).then((res) => {
+                                        setMyReservationList(myReservationList);
+                                    }
+                                )
+
+                            }}>취소</button> : null}
                 </span>
             </div>
         ))}

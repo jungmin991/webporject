@@ -94,7 +94,7 @@ const Camp = {
     mySiteList: (req, res) => {
         console.log(req.body.guestNo);
         const query =
-            'select name, siteName, state, campground.campGroundNo ' +
+            'select reservationNo, name, siteName, state, campground.campGroundNo ' +
             'from campground ' +
             'join campgroundsite on campground.campgroundNo = campgroundsite.campgroundNo ' +
             'join reservation on campgroundsite.campGroundSiteNo = reservation.campGroundSiteNo ' +

@@ -14,12 +14,20 @@ const Review = {
 
     // 리뷰 조회(캠핑장별)
     show: (req, res) => {
-        const {campGroundNo} = req.body;
-        const query = 'select * from review where campGroundNo = ?'
+        const {groundNo} = req.body;
+        const campGroundNo = groundNo; // Properly access the campGroundNo
+        console.log("campGroundNo : " + campGroundNo);
+        const query = 'SELECT * FROM review WHERE campGroundNo = ?';
         conn.query(query, [campGroundNo], (err, result) => {
+            if (err) {
+                console.error("Error fetching reviews: ", err);
+                return res.status(500).send('Error fetching reviews');
+            }
+            console.log("리뷰 조회: ", result);
             res.send(result);
-        })
+        });
     },
+
 }
 
 module.exports = Review;

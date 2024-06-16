@@ -8,7 +8,9 @@ export default function DetailAndReview({userNo}) {
     const [isReservation, setIsReservation] = useState(false);
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
+    const groundNo = useParams();
     const [reservationSite, setReservationSite] = useState({
+        campGroundNo: groundNo.id,
         campGroundSiteNo: 0,
         guestNo: userNo,
         enterDay: null,
@@ -20,14 +22,14 @@ export default function DetailAndReview({userNo}) {
     const [reviewData, setReviewData] = useState({});
     const [siteData, setSiteData] = useState([]);
 
-    const groundNo = useParams();
     const navigate = useNavigate();
 
     function getReviewData() {
-        console.log(userNo);
-        axios.post(requestURL + '/review/show', groundNo)
+        console.log("groundNo : " + groundNo.id);
+        axios.post(requestURL + '/review/show', {groundNo: groundNo.id})
             .then((response) => {
-                setReviewData(response.data);
+                console.log(response.data[0]);
+                setReviewData(response.data[0]);
             })
             .catch((error) => {
                 console.error('Error fetching data:', error);
@@ -78,7 +80,7 @@ export default function DetailAndReview({userNo}) {
                     <input
                         type="date"
                         value={checkIn}
-                        onChange={(e) => (setCheckIn(e.target.value), ({
+                        onChange={(e) => (setCheckIn(e.target.value), setReservationSite({
                             ...reservationSite,
                             enterDay: e.target.value
                         }))}
@@ -120,9 +122,12 @@ export default function DetailAndReview({userNo}) {
                     {isReservation ? <div>
                         <input type="text" placeholder="어른 수" onChange={
                             (e) => {
-                                setReservationSite({...reservationSite, adult: e.target.value})
-                                setReservationSite({...reservationSite, campGroundSiteNo: site.campGroundSiteNo})
-
+                                console.log(e.target.value);
+                                setReservationSite({
+                                    ...reservationSite,
+                                    adult: e.target.value,
+                                    campGroundSiteNo: site.campGroundSiteNo
+                                })
                             }
                         }></input>
                         <input type="text" placeholder="아이 수" onChange={
@@ -201,7 +206,7 @@ export default function DetailAndReview({userNo}) {
                     <h3>리뷰</h3>
                     <div className="review-item">
                         <div className="review-img">
-                            <p>리뷰사진</p>
+                            <img src={"/uploads/"+reviewData.reviewImage}></img>
                         </div>
                         <div className="review-content">
                             <p>리뷰 내용</p>
