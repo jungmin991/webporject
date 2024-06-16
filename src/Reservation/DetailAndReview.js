@@ -37,6 +37,7 @@ export default function DetailAndReview() {
         getCampData();
         getReviewData();
         console.log(campData);
+        console.log(reviewData);
     }, []);
 
 
