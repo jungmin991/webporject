@@ -57,15 +57,15 @@ export default function UpdateCamping() {
         <div>
             <form className="RegistCampForm">
                 <div className="RegistCampFormDiv">
-                    <label className="label">매너 시작 시간<input type="time" onChange={(e) => setCampGroundInfo(...campGroundInfo ,{mannerStartTime: e.target.value})}/><br/></label>
-                    <label className="label">매너 종료 시간<input type="time" onChange={(e) => setCampGroundInfo(...campGroundInfo ,{mannerEndTime: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 이름<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{name: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 위치<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{location: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 타입<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{type: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 대표번호<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{callNum: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 설명<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{campingInfo: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 입실 시간<input id="campingInfoInput" type='time' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{enterTime: e.target.value})}/><br/></label>
-                    <label className="label">캠핑장 퇴실 시간<input id="campingInfoInput" type='time' onChange={(e) => setCampGroundInfo(...campGroundInfo ,{leaveTime: e.target.value})}/><br/></label>
+                    <label className="label">매너 시작 시간<input type="time" onChange={(e) => setCampGroundInfo({...campGroundInfo ,mannerStartTime: e.target.value})}/><br/></label>
+                    <label className="label">매너 종료 시간<input type="time" onChange={(e) => setCampGroundInfo({...campGroundInfo ,mannerEndTime: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 이름<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo({...campGroundInfo ,name: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 위치<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo({...campGroundInfo ,location: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 타입<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo({...campGroundInfo ,type: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 대표번호<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo({...campGroundInfo ,callNum: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 설명<input id="campingInfoInput" type='text' onChange={(e) => setCampGroundInfo({...campGroundInfo ,campingInfo: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 입실 시간<input id="campingInfoInput" type='time' onChange={(e) => setCampGroundInfo({...campGroundInfo ,enterTime: e.target.value})}/><br/></label>
+                    <label className="label">캠핑장 퇴실 시간<input id="campingInfoInput" type='time' onChange={(e) => setCampGroundInfo({...campGroundInfo ,leaveTime: e.target.value})}/><br/></label>
                 </div>
             </form>
             <div>
