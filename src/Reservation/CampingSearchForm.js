@@ -7,7 +7,7 @@ import CampingTable from './CampingTable';
 
 const Search = () => {
     const [name, setName] = useState('');
-    const [local, setLocal] = useState('%');
+    const [local, setLocal] = useState('');
     const [type, setType] = useState('%');
     const [checkIn, setCheckIn] = useState('');
     const [checkOut, setCheckOut] = useState('');
@@ -24,7 +24,7 @@ const Search = () => {
         if (searchName === '') {
             searchName = '%';
         }
-        if (searchLocal === 'all') {
+        if (searchLocal === '') {
             searchLocal = '%';
         }
         if (searchType === 'all') {
@@ -88,24 +88,6 @@ const Search = () => {
                         <option value="CARAVAN">카라반</option>
                         <option value="PENSION">펜션</option>
                     </select>
-                </div>
-                <div className="form-group">
-                    <input
-                        type="date"
-                        value={checkIn}
-                        onChange={(e) => setCheckIn(e.target.value)}
-                        placeholder="입실일"
-                        className="form-control"
-                    />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="date"
-                        value={checkOut}
-                        onChange={(e) => setCheckOut(e.target.value)}
-                        placeholder="퇴실일"
-                        className="form-control"
-                    />
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn">검색</button>
