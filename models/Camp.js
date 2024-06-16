@@ -57,7 +57,7 @@ const Camp = {
         })
     },
     getTest: (req, res) => {
-        conn.query("SELECT * FROM campground WHERE name LIKE %" + "?" + "% AND type LIKE ? AND location LIKE %" + "?" + "%", [req.body.name, req.body.type, req.body.local], (err, result) => {
+        conn.query("SELECT * FROM campground WHERE name LIKE ? AND type LIKE ? AND location LIKE ?", [req.body.name, req.body.type, req.body.local], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
