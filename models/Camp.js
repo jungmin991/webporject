@@ -254,17 +254,17 @@ const Camp = {
 
     updateCamp: (req, res) => {
         conn.query("UPDATE campground\n" +
-            "SET\n" +
-            "    mannerStartTime = ?,\n" +
-            "    mannerEndTime = ?,\n" +
-            "    name = ?,\n" +
-            "    location = ?,\n" +
-            "    type = ?,\n" +
-            "    callNum = ?,\n" +
-            "    campingInfo = ?,\n" +
-            "    enterTime = ?,\n" +
-            "    leaveTime = ?\n" +
-            "WHERE campGroundNo = ?;", [req.body.mannerStartTime, req.body.mannerEndTime, req.body.name, req.body.location, req.body.type, req.body.callNum, req.body.campingInfo , req.body.enterTime, req.body.leaveTime, req.body.campGroundNo], (err, result) => {
+        "SET\n" +
+        "    mannerStartTime = COALESCE(NULLIF(?, ''), mannerStartTime),\n" +
+        "    mannerEndTime = COALESCE(NULLIF(?, ''), mannerEndTime),\n" +
+        "    name = COALESCE(NULLIF(?, ''), name),\n" +
+        "    location = COALESCE(NULLIF(?, ''), location),\n" +
+        "    type = COALESCE(NULLIF(?, ''), type),\n" +
+        "    callNum = COALESCE(NULLIF(?, ''), callNum),\n" +
+        "    campingInfo = COALESCE(NULLIF(?, ''), campingInfo),\n" +
+        "    enterTime = COALESCE(NULLIF(?, ''), enterTime),\n" +
+        "    leaveTime = COALESCE(NULLIF(?, ''), leaveTime)\n" +
+        "WHERE campGroundNo = ?;", [req.body.mannerStartTime, req.body.mannerEndTime, req.body.name, req.body.location, req.body.type, req.body.callNum, req.body.campingInfo , req.body.enterTime, req.body.leaveTime, req.body.campGroundNo], (err, result) => {
             if (err) {
                 console.log(err)
             } else {
